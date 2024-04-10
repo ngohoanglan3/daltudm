@@ -1,5 +1,7 @@
 package com.example.demo.DTO;
 
+import com.example.demo.model.User_Answer_Key;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,9 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class User_AnswerDTO {
-    private int exam_id;
-
-    private int question_id;
+    private User_Answer_Key id;
 
     private int option_choose;
 

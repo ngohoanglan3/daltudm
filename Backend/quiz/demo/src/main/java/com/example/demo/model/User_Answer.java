@@ -5,8 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
@@ -17,13 +17,8 @@ import jakarta.persistence.Table;
 @ToString
 @IdClass(User_Answer_Key.class)
 public class User_Answer {
-    @Column(name = "user_id")
-    @Id
-    private int user_id;
-
-    @Column(name = "question_id")
-    @Id
-    private int question_id;
+    @EmbeddedId
+    private User_Answer_Key id;
 
     @Column(name="option_choose")
     private int option_choose;

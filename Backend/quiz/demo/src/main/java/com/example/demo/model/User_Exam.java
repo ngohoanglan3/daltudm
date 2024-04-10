@@ -5,9 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Getter
@@ -15,15 +14,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "user_exam")
 @ToString
-@IdClass(User_Exam_Key.class)
 public class User_Exam {
-    @Column(name = "exam_id")
-    @Id
-    private int exam_id;
-
-    @Id
-    @Column(name = "user_id")
-    private int user_id;
+    @EmbeddedId
+    private User_Exam_Key id;
 
     @Column(name = "score")
     private int score;

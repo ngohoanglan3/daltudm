@@ -4,9 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Getter
@@ -34,4 +37,7 @@ public class User {
     @Column(name="password")
     private String password;
     
+    @OneToMany(mappedBy = "user_id")
+    Set<Exam> exams;
+
 }
