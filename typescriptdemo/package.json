@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
   }
 }
