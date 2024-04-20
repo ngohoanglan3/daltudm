@@ -1,34 +1,17 @@
 class Employee {
-    private _id!: number
-    public get id(): number {
-        return this._id
-    }
-    public set id(value: number) {
-        this._id = value
-    }
-    private _add!: string
-    public get add(): string {
-        return this._add
-    }
-    public set add(value: string) {
-        this._add = value
-    }
+    id: number
+    add: Address
     private _name!: string
-    public get name(): string {
-        return this._name
-    }
-    public set name(value: string) {
-        this._name = value
-    }
+    name: String
 
-    constructor(id: number, add: string, name: string) {
+    constructor(id: number, add: Address, name: string) {
         this.id = id
         this.add = add
         this.name = name
     }
 
     getNameAndAdd(): String {
-        return `${this.name} at ${this.add}`
+        return `${this.name} at ${this.add.City} City, ${this.add.Street} Street, ${this.add.place} Place`
     }
 
 }
@@ -37,12 +20,22 @@ type emp<T> = T[]
 
 let emp_array: emp<Employee> = []
 
-let emp1 = new Employee(12, 'HN', 'NHL')
+let emp1 = new Employee(12, {City: 'HN', Street: 'LE THANH NGHI', place: 54}, 'NHL')
 emp_array.push(emp1)
 
-let emp2 = new Employee(2213, 'BG', 'NGR')
-emp_array.push(emp2)
+// let emp2 = new Employee(2213, 'BG', 'NGR')
+// emp_array.push(emp2)
+
+class Manager extends Employee {
+    constructor(id: number, add: Address, name: string) {
+        super(id, add, name)
+    }
+}
+
+// let emp3 = new Manager(213, 'HCM', 'SEN')
+// emp_array.push(emp3)
+
 for (let i in emp_array) {
     console.log(emp_array[i])
+    console.log(emp_array[i].getNameAndAdd())
 }
-console.log(emp_array[0].getNameAndAdd())
