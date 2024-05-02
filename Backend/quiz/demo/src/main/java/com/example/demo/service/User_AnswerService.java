@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.User_AnswerDTO;
+import com.example.demo.DTO.User_Answer_Cross;
 import com.example.demo.ex.myException;
 import com.example.demo.model.User_Answer;
 import com.example.demo.model.User_Answer_Key;
@@ -56,6 +57,33 @@ public class User_AnswerService {
             user_AnswerRepository.save(entity);
         }else throw new myException("da co!");
 
+    }
+
+    QuestionService questionService;
+    UserService userService;
+    public void addNewByCross(User_Answer_Cross cross) {
+        User_AnswerDTO dto = new User_AnswerDTO();
+        User_Answer_Key key = new User_Answer_Key(cross.getUser_id(), cross.getQuestion_id());
+        dto.setId(key);
+        if (user_AnswerRepository.findById(dto.getId()).isEmpty()){
+            dto.setOption_choose(cross.getOption_choose());
+            dto.setQuestion(questionService.getQuestion(cross.getQuestion_id()));
+            dto.setUser(userService.getUser(cross.getUser_id()));
+            dto.set_correct(cross.is_correct());
+            User_Answer entity = new User_Answer();
+            BeanUtils.copyProperties(dto, entity);
+
+            user_AnswerRepository.save(entity);
+        }else throw new myException("da co!");
+
+    }
+    
+    public User_AnswerDTO findByCross(User_Answer_Cross cross) {
+        User_Answer_Key key = new User_Answer_Key(cross.getUser_id(), cross.getQuestion_id());
+        User_Answer entity = user_AnswerRepository.findById(key)
+                .orElseThrow(() -> new myException("khong tim thay!"));
+
+        return toDto(entity);
     }
 
     public void update(User_AnswerDTO dto) {

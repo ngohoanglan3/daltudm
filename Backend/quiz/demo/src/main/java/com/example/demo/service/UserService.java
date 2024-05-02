@@ -42,6 +42,14 @@ public class UserService {
 
         return toDto(entity);
     }
+    
+
+    public User getUser(int roll) {
+        User entity = userRepository.findById(roll)
+                .orElseThrow(() -> new myException("khong tim thay User voi so roll " + roll));
+
+        return entity;
+    }
 
     public List<UserDTO> findByRole(Role role) {
         return userRepository.findByRole(role)

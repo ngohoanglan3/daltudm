@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.QuestionDTO;
 import com.example.demo.DTO.User_AnswerDTO;
+import com.example.demo.DTO.User_Answer_Cross;
 import com.example.demo.DTO.User_ExamDTO;
 import com.example.demo.model.User_Answer_Key;
 import com.example.demo.service.User_AnswerService;
@@ -34,7 +35,31 @@ public class User_AnswerController {
     } 
 
     @PostMapping(route + "/save")
-    public ResponseEntity<?> saveDi(@RequestBody List<User_AnswerDTO> dto) {
+    public ResponseEntity<?> saveDi(@RequestBody List<User_Answer_Cross> cross) {
+        int questioncorrect = 0;
+        for (User_Answer_Cross user_Answer_Cross : cross) {
+            user_AnswerService.addNewByCross(user_Answer_Cross);
+            if (user_Answer_Cross.is_correct()) {
+                questioncorrect += 1;
+            }
+        }
+        User_AnswerDTO temp = user_AnswerService.findByCross(cross.getFirst());
+        int hmm = temp.getQuestion().getExam().getExam_id();
+        List<QuestionDTO> lDtos = questionController.getbyExamid(hmm);
+        int numbofquest = lDtos.size();
+        float score = 10 * (questioncorrect / numbofquest);
+        User_ExamDTO aa = new User_ExamDTO();
+        aa.setScore(score);
+        aa.setUser(temp.getUser());
+        aa.setExam(temp.getQuestion().getExam());
+        user_ExamController.saveDi(aa);
+
+        return new ResponseEntity<>(null, HttpStatus.valueOf(201));
+
+    }
+
+    @PostMapping(route + "/savebackup")
+    public ResponseEntity<?> saveDiBackup(@RequestBody List<User_AnswerDTO> dto) {
         int questioncorrect = 0;
         for (User_AnswerDTO user_AnswerDTO : dto) {
             user_AnswerService.addNew(user_AnswerDTO);

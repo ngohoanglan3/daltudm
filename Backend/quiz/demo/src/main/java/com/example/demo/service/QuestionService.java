@@ -47,6 +47,13 @@ public class QuestionService {
         return toDto(entity);
     }
 
+    public Question getQuestion(int roll) {
+        Question entity = questionRepository.findById(roll)
+                .orElseThrow(() -> new myException("khong tim thay Question voi so roll " + roll));
+
+        return entity;
+    }
+
     public List<QuestionDTO> getQuestionListUsingExamID(int examid) {
         Optional<Exam> temp = examRepository.findById(examid);
         if(temp.isEmpty()) {

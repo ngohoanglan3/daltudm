@@ -13,4 +13,9 @@ public class User_Answer_Key implements Serializable{
     @Column(name = "question_id")
     private int question_id;
 
+    public User_Answer_Key(int user_id, int question_id){
+        this.user_id = user_id;
+        this.question_id = question_id;
+    }
+
 }
