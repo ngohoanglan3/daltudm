@@ -5,6 +5,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+
+import com.example.demo.model.Question;
 
 @Getter
 @Setter
@@ -17,5 +20,7 @@ public class ExamDTO {
     private LocalDateTime time_test;
 
     private String description;
+
+    private Set<Question> qSet;
 
 }

@@ -27,6 +27,13 @@ public class QuestionController {
         return entity; 
     } 
 
+    @GetMapping(route + "/temp/{id}") 
+    public List<QuestionDTO> getbyExamid(@PathVariable int id) { 
+        List<QuestionDTO> entity = questionService.getQuestionListUsingExamID(id);
+        return entity; 
+    } 
+
+
     @PostMapping(route + "/save")
     public ResponseEntity<?> saveDi(@RequestBody QuestionDTO dto) {
         questionService.addNew(dto);

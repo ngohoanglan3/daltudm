@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.QuestionDTO;
 import com.example.demo.ex.myException;
+import com.example.demo.model.Exam;
 import com.example.demo.model.Question;
+import com.example.demo.repository.ExamRepository;
 import com.example.demo.repository.QuestionRepository;
 
 import jakarta.transaction.Transactional;
@@ -20,6 +22,9 @@ import jakarta.transaction.Transactional;
 public class QuestionService {
     @Autowired
     QuestionRepository questionRepository;
+
+    @Autowired
+    ExamRepository examRepository;
 
     public List<QuestionDTO> findAll(){
         return questionRepository.findAll()
@@ -40,6 +45,17 @@ public class QuestionService {
                 .orElseThrow(() -> new myException("khong tim thay Question voi so roll " + roll));
 
         return toDto(entity);
+    }
+
+    public List<QuestionDTO> getQuestionListUsingExamID(int examid) {
+        Optional<Exam> temp = examRepository.findById(examid);
+        if(temp.isEmpty()) {
+            return null;
+        }
+        Exam exam = temp.get();
+        List<QuestionDTO> ListofQuestion = questionRepository.findByExam(exam)
+        .stream().map(this::toDto).collect(Collectors.toList());
+        return ListofQuestion;
     }
 
     public void xoaDi(int roll) {

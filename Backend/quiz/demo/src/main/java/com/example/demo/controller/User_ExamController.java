@@ -29,7 +29,7 @@ public class User_ExamController {
     } 
 
     @PostMapping(route + "/save")
-    public ResponseEntity<?> saveDi(@RequestBody User_ExamDTO dto) {
+    public ResponseEntity<?> saveDi(User_ExamDTO dto) {
         user_ExamService.addNew(dto);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));

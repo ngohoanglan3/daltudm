@@ -7,7 +7,9 @@ import lombok.ToString;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
 @Getter
@@ -15,10 +17,19 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "user_answer")
 @ToString
-@IdClass(User_Answer_Key.class)
 public class User_Answer {
     @EmbeddedId
-    private User_Answer_Key id;
+    User_Answer_Key id;
+        
+    @ManyToOne
+    @MapsId("user_id")
+    @JoinColumn(name = "user_id")
+    User user;
+
+    @ManyToOne
+    @MapsId("question_id")
+    @JoinColumn(name = "question_id")
+    Question question;
 
     @Column(name="option_choose")
     private int option_choose;

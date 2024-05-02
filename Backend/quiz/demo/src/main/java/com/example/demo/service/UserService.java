@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.UserDTO;
 import com.example.demo.ex.myException;
+import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
@@ -40,6 +41,13 @@ public class UserService {
                 .orElseThrow(() -> new myException("khong tim thay User voi so roll " + roll));
 
         return toDto(entity);
+    }
+
+    public List<UserDTO> findByRole(Role role) {
+        return userRepository.findByRole(role)
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
     public void xoaDi(int roll) {

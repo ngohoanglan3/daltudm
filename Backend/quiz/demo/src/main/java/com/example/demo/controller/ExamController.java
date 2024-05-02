@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.ExamDTO;
 import com.example.demo.service.ExamService;
+import com.example.demo.service.QuestionService;
 
 @RestController
 public class ExamController {
     final String route = "/Exam";
     @Autowired
     ExamService examService;
+
+    @Autowired
+    QuestionService questionService;
     
     @GetMapping(route + "/getAll")
     public List<ExamDTO> findAll() {

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.model.Role;
 import com.example.demo.service.UserService;
 
 @RestController
@@ -19,6 +20,11 @@ public class UserController {
     @GetMapping(route + "/getAll")
     public List<UserDTO> findAll() {
         return userService.findAll();
+    }
+
+    @GetMapping(route + "/getByRole")
+    public List<UserDTO> findRole(@RequestBody Role role) {
+        return userService.findByRole(role);
     }
 
     @GetMapping(route + "/{id}") 

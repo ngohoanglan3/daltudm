@@ -7,15 +7,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.DTO.QuestionDTO;
 import com.example.demo.DTO.User_AnswerDTO;
+import com.example.demo.DTO.User_ExamDTO;
 import com.example.demo.model.User_Answer_Key;
 import com.example.demo.service.User_AnswerService;
 
 @RestController
 public class User_AnswerController {
-    final String route = "/User_Answer";
+    final String route = "/User_Submit";
     @Autowired
     User_AnswerService user_AnswerService;
+
+    QuestionController questionController;
+    User_ExamController user_ExamController;
     
     @GetMapping(route + "/getAll")
     public List<User_AnswerDTO> findAll() {
@@ -29,8 +34,24 @@ public class User_AnswerController {
     } 
 
     @PostMapping(route + "/save")
-    public ResponseEntity<?> saveDi(@RequestBody User_AnswerDTO dto) {
-        user_AnswerService.addNew(dto);
+    public ResponseEntity<?> saveDi(@RequestBody List<User_AnswerDTO> dto) {
+        int questioncorrect = 0;
+        for (User_AnswerDTO user_AnswerDTO : dto) {
+            user_AnswerService.addNew(user_AnswerDTO);
+            if (user_AnswerDTO.is_correct()) {
+                questioncorrect += 1;
+            }
+        }
+        User_AnswerDTO temp = dto.getFirst();
+        int hmm = temp.getQuestion().getExam().getExam_id();
+        List<QuestionDTO> lDtos = questionController.getbyExamid(hmm);
+        int numbofquest = lDtos.size();
+        float score = 10 * (questioncorrect / numbofquest);
+        User_ExamDTO aa = new User_ExamDTO();
+        aa.setScore(score);
+        aa.setUser(temp.getUser());
+        aa.setExam(temp.getQuestion().getExam());
+        user_ExamController.saveDi(aa);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
 
