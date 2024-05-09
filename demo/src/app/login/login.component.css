@@ -1,0 +1,49 @@
+.container {
+  background: #FFF;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  background: url(/demo/src/assets/background.png) ;
+}
+
+.Line {
+  width: 500px;
+  height: 0px;
+  border: 1px black solid;
+}
+
+.userInput {
+  width: 451px;
+  height: 70px;
+}
+.userInput #username {
+  height: 50%;
+  padding: 0px;
+  border: 1px black;
+}
+.passInput {
+  width: 451px;
+  height: 70px;
+}
+
+.passInput #password {
+  height: 50%;
+  padding: 0px;
+}
+
+.icon {
+  width: 50%;
+  height: 50%;
+}
+
+.forgotPassword:hover {  
+  color: red; /* Thay đổi màu sắc của văn bản khi hover */
+  font-weight: bold; /* Thay đổi font-weight của văn bản khi hover */
+  display: inline;
+  text-align: right;
+  background-color: rgba(244, 152, 156, 0.5);
+}
