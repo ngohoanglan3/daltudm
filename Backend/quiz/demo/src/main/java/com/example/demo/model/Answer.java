@@ -30,6 +30,7 @@ public class Answer {
     private String description;
 
     @Column(name="is_correct")
+    @JsonIgnore
     private boolean is_correct;
     
     @ManyToOne
