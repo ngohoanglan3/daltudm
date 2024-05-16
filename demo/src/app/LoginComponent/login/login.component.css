@@ -1,14 +1,29 @@
+* {
+  box-sizing: border-box;
+}
 .container {
-  border-radius: 2px;
+  margin: 0;
   display: flex;
-  justify-content: center;
+  height: 100vh;
+}
+.bg {
+  background-image: url("/assets/background.jpg");
+  background-position: center;
+  flex: 7;
+  background-size: cover;
+}
+
+.login-panel {
+  border-radius: 2px;
+  justify-items: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
+  flex: 3;
+  display: flex;
 }
 .logo {
-  margin: 5vh 0px 0vh;  
-
+  margin: 5vh 0px 0vh;
 }
 
 img {
@@ -16,15 +31,11 @@ img {
 }
 
 .line {
-  width: 100%;
+  width: 66%;
   border-bottom: 2px solid black;
   text-align: center;
   margin-bottom: 2vh;
   margin-top: 3vh;
-}
-
-#a.line {
-  width: 100%;
 }
 
 h1 {
@@ -33,11 +44,10 @@ h1 {
 }
 
 .section {
-  width: 100%;
+  width: 66%;
   text-align: left;
 }
 .User {
-  width: 19.8vw;
   display: flex;
   align-items: center;
 }
@@ -48,28 +58,18 @@ h1 {
 }
 
 .Password {
-  width: 19.8vw;
   display: flex;
   align-items: center;
+  margin-bottom: 2vh;
 }
 
 input {
+  font-family: "JetBrains Mono", monospace;
   height: 5vh;
   border-radius: 10px;
   border: 3px solid #000;
   padding: 0px 10px;
   flex: 1;
-}
-
-.ForgotPass {
-  text-align: right;
-  margin-top: 2vh;
-  margin-bottom: 8vh;
-}
-
-.ForgotPass:hover {
-  color: rgb(217, 30, 54);
-  text-decoration: underline;
 }
 
 button {
@@ -84,10 +84,6 @@ button {
   font-style: normal;
   font-weight: 800;
   line-height: normal;
+  margin-top: 8vh;
 }
 
-.other {
-  text-align: left;
-  display: grid;
-  margin-bottom: 3vh;
-}

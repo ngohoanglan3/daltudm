@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
-  selector: 'app-admin',
-  standalone: true,
-  imports: [],
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.css'
+    selector: 'app-admin',
+    standalone: true,
+    templateUrl: './admin.component.html',
+    styleUrl: './admin.component.css',
+    imports: [LoginComponent]
 })
-export class AdminComponent {
+export class AdminComponent extends LoginComponent {
 
 }

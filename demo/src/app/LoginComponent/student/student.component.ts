@@ -8,6 +8,6 @@ import { LoginComponent } from "../login/login.component";
     styleUrl: './student.component.css',
     imports: [LoginComponent]
 })
-export class StudentComponent {
-
+export class StudentComponent extends LoginComponent {
+    override title = 'Sinh Viên';
 }

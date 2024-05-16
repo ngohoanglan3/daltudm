@@ -12,7 +12,6 @@ export const routes: Routes = [
   { path: 'teacher', component: TeacherComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'forgotpass', component: ForgotPassComponent},
-  { path: 'login', component:LoginComponent}
 ];
 
 @NgModule({

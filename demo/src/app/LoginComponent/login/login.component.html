@@ -1,28 +1,33 @@
 <div class="container">
-    <div class="logo">
-        <img src="/assets/huce_logo.png" alt="logo">
-    </div>
-    <div class="line"></div>
-    <h1>ĐĂNG NHẬP VÀO TÀI KHOẢN</h1>
-    <h3>Sinh Viên</h3>
-    <div class="section">
-        <h4>Tài Khoản</h4>
-        <div class="User">
-            <img class="Icon" src="/assets/reading-book.png" alt="">
-            <input id="username" type="text">
+    <div class="bg"></div>
+    <div class="login-panel">
+        <div class="logo">
+            <img src="/assets/huce_logo.png" alt="logo">
         </div>
-        <h4>Mật Khẩu</h4>
-        <div class="Password">
-
-            <img class="Icon" src="/assets/padlock.png" alt="">
-            <input id="password" type="password">
+        <div class="line"></div>
+        <h1>ĐĂNG NHẬP VÀO TÀI KHOẢN</h1>
+        <h3><ng-content select="[title]"></ng-content></h3>
+        <div class="section">
+            <h4>Tài Khoản</h4>
+            <div class="User">
+                <ng-content class="Icon" select="[UserIcon]"></ng-content>
+                <input id="username" type="text">
+            </div>
+            <h4><ng-content select="[pass]"></ng-content></h4>
+            <div class="Password">
+                <ng-content class="Icon" select="[PassIcon]"></ng-content>                
+                <input id="password" type="password">
+            </div>            
+            <ng-content select="[forgotPass]"></ng-content>            
+            <button>ĐĂNG NHẬP</button>
         </div>
-        <div class="ForgotPass"><a href="">Quên Mật Khẩu?</a></div>
-        <button>ĐĂNG NHẬP</button>
-        <div class="line" id="a"></div>
+        <div class="line"></div>
         <div class="other">
-            <a href="">Giáo Viên</a>
-            <a href="">Admin</a>
+            <ng-content select="[student]"></ng-content>
+            <ng-content select="[teacher]"></ng-content>
+            <ng-content select="[admin]"></ng-content>
+            <!-- <a class="teacher" (click)="teacher()">Giáo Viên</a> <br>
+            <a class="admin" (click)="admin()">Admin</a> -->
         </div>
     </div>
 </div>
