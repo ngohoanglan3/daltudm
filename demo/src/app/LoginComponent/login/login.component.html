@@ -7,11 +7,11 @@
         <div class="line"></div>
         <h1>ĐĂNG NHẬP VÀO TÀI KHOẢN</h1>
         <h3><ng-content select="[title]"></ng-content></h3>
-        <div class="section">
+        <form class="section" [formGroup]="loginForm" (ngSubmit)="login()">
             <h4>Tài Khoản</h4>
             <div class="User">
                 <ng-content class="Icon" select="[UserIcon]"></ng-content>
-                <input id="username" type="text">
+                <input id="username" type="text" [formControlName]="'username'">
             </div>
             <h4><ng-content select="[pass]"></ng-content></h4>
             <div class="Password">
@@ -20,7 +20,7 @@
             </div>            
             <ng-content select="[forgotPass]"></ng-content>            
             <button>ĐĂNG NHẬP</button>
-        </div>
+        </form>
         <div class="line"></div>
         <div class="other">
             <ng-content select="[student]"></ng-content>
