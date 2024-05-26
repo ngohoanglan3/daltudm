@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-body {
+
+* {
   font-family: "JetBrains Mono", monospace;
+}
+
+body {
   margin: 0px;
   padding: 0px;
 }
@@ -44,3 +48,5 @@ body {
   color: rgb(217, 30, 54);
   text-decoration: underline;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

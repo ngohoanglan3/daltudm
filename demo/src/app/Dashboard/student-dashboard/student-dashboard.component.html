@@ -11,9 +11,15 @@
                 <li><a href="">Bài Thi</a></li>
             </ul>
         </div>
-        <div class="menu-section">
-            <div class="menu-icon" (click)="toggleBar()"></div>
-        </div>
+        <button type="button" class="menu-section" (click)="toggleBar()">
+            <div class="menu-icon"></div>
+        </button>
     </header>
     <div class="main-content"></div>
+    <div class="menu" *ngIf="showBar">
+        <div class="outClose"><button class="close" type="button" (click)="closeBar()"></button></div>
+        <div class="info"><a href="">thông tin cá nhân</a></div>
+        <div class="changePass"><a href="">đổi mật khẩu</a></div>
+        <div class="logout"><a href="">đăng xuất</a></div>
+    </div>
 </div>
