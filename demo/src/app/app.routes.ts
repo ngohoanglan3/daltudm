@@ -4,6 +4,7 @@ import { StudentComponent } from './LoginComponent/student/student.component';
 import { AdminComponent } from './LoginComponent/admin/admin.component';
 import { NgModule } from '@angular/core';
 import { ForgotPassComponent } from './LoginComponent/forgot-pass/forgot-pass.component';
+import { StudentDashboardComponent } from './Dashboard/student-dashboard/student-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/student', pathMatch: 'full' },
@@ -11,6 +12,7 @@ export const routes: Routes = [
   { path: 'teacher', component: TeacherComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'forgotpass', component: ForgotPassComponent},
+  { path: 'dashboard', component: StudentDashboardComponent}
 ];
 
 @NgModule({

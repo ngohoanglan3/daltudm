@@ -1,67 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginRequestPayload } from './login-request.payload';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, HttpClientModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  loginRequestPayload: LoginRequestPayload;
-  isError: boolean;
+export class LoginComponent {
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private toastr: ToastrService
-  ) {
-    this.loginRequestPayload = {
-      username: '',
-      password: '',
-    };
-  }
-  ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-    });
+  loginObj: Login;
+
+  constructor(private route: Router, private http: HttpClient) {
+    this.loginObj = new Login();
   }
 
-  login() {
-    this.loginRequestPayload.username = this.loginForm.get('username').value;
-    this.loginRequestPayload.password = this.loginForm.get('password').value;
-
-    this.authService.login(this.loginRequestPayload).subscribe(
-      (data: any) => {
-        this.isError = false;
-        this.router.navigateByUrl('');
-        this.toastr.success('Login Successful');
-      },
-      (error: any) => {
-        this.isError = true;
-        throw(error);
+  onLogin() {
+    this.http.post('https://freeapi.miniprojectideas.com/api/User/Login', this.loginObj).subscribe((res: any)=>{
+      if(res.result) {
+        localStorage.setItem('token', res.data.token)
+        this.route.navigateByUrl('/dashboard')
       }
-    );
+      else {
+        this.route.navigateByUrl('/')
+      }
+    })
   }
 
   student(): void {
-    this.router.navigateByUrl('/student');
+    this.route.navigateByUrl('/student');
   }
 
   teacher(): void {
-    this.router.navigateByUrl('/teacher');
+    this.route.navigateByUrl('/teacher');
   }
 
   admin(): void {
-    this.router.navigateByUrl('/admin');
+    this.route.navigateByUrl('/admin');
   }
 
   forgotPass() {
-    this.router.navigateByUrl('/forgotpass');
+    this.route.navigateByUrl('/forgotpass');
+  }
+}
+
+export class Login {
+  username: string;
+  password: string;
+  constructor() {
+    this.username = '';
+    this.password = '';
   }
 }

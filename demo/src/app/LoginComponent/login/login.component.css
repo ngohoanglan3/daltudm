@@ -87,3 +87,7 @@ button {
   margin-top: 8vh;
 }
 
+button:hover {
+  background: #BF3100;
+  cursor: pointer;
+}
