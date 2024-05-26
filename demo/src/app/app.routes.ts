@@ -5,14 +5,18 @@ import { AdminComponent } from './LoginComponent/admin/admin.component';
 import { NgModule } from '@angular/core';
 import { ForgotPassComponent } from './LoginComponent/forgot-pass/forgot-pass.component';
 import { StudentDashboardComponent } from './Dashboard/student-dashboard/student-dashboard.component';
+import { CalenderComponent } from './Dashboard/calender/calender.component';
+import { NotfoundComponent } from './LoginComponent/notfound/notfound.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/student', pathMatch: 'full' },
   { path: 'student', component: StudentComponent },
   { path: 'teacher', component: TeacherComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'forgotpass', component: ForgotPassComponent},
-  { path: 'dashboard', component: StudentDashboardComponent}
+  { path: 'forgotpass', component: ForgotPassComponent },
+  { path: 'dashboard', component: StudentDashboardComponent},
+  { path: 'dashboard/calendar', component: CalenderComponent},
+  { path: '**', component: NotfoundComponent },
 ];
 
 @NgModule({

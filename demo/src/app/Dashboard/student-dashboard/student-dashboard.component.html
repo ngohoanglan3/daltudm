@@ -5,7 +5,7 @@
         </div>
         <div class="line">
             <ul>
-                <li><a href="">Lịch Thi</a></li>
+                <li><a href="dashboard/calendar">Lịch Thi</a></li>
                 <li><a href="">Điểm Thi</a></li>
                 <li><a href="">Ôn Tập</a></li>
                 <li><a href="">Bài Thi</a></li>
@@ -15,11 +15,14 @@
             <div class="menu-icon"></div>
         </button>
     </header>
-    <div class="main-content"></div>
+    <div class="main-content">
+        <ng-content select="[content]"></ng-content>
+    </div>
     <div class="menu" *ngIf="showBar">
         <div class="outClose"><button class="close" type="button" (click)="closeBar()"></button></div>
         <div class="info"><a href="">thông tin cá nhân</a></div>
         <div class="changePass"><a href="">đổi mật khẩu</a></div>
         <div class="logout"><a href="">đăng xuất</a></div>
+        <div class="menu-main__overlay"></div>
     </div>
 </div>

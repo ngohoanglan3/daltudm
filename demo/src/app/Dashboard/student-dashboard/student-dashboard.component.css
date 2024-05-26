@@ -98,10 +98,6 @@ li {
   height: 40px;
 }
 
-mat-sidenav-container {
-  height: calc(100vh- 80px);
-}
-
 .menu {
   right: 0;
   width: 350px;
@@ -140,4 +136,13 @@ a, .info, .changePass, .logout {
   height: 30px;
   filter: invert(1);
   cursor: pointer;
+}
+
+.menu-main__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 406px);
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
 }
