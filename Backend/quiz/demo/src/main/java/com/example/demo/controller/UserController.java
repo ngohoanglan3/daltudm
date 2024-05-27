@@ -59,7 +59,7 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.valueOf(204));
     }
 
-    @GetMapping(route + "/login")
+    @PostMapping(route + "/Login")
     public ResponseEntity<JwtAuthResponse> login(@RequestParam UserDTO loginDto) {
         String token = authService.login(loginDto);
 
