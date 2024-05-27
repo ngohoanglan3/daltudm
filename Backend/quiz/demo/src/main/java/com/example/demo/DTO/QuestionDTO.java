@@ -21,6 +21,6 @@ public class QuestionDTO {
 
     private Exam exam;
 
-    private Set<Answer> aSet;
+    private Set<AnswerWithoutCorrect> aSet;
 
 }

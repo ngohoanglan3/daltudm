@@ -7,12 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.DTO.JwtAuthResponse;
 import com.example.demo.DTO.UserDTO;
 import com.example.demo.model.Role;
+import com.example.demo.service.AuthService;
 import com.example.demo.service.UserService;
+
 
 @RestController
 public class UserController {
+    private AuthService authService;
     final String route = "/User";
     @Autowired
     UserService userService;
@@ -54,5 +58,16 @@ public class UserController {
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(204));
     }
+
+    @GetMapping(route + "/login")
+    public ResponseEntity<JwtAuthResponse> login(@RequestParam UserDTO loginDto) {
+        String token = authService.login(loginDto);
+
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+
+        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
+    }
+    
 
 }
