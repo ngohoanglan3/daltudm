@@ -7,6 +7,8 @@ import { ForgotPassComponent } from './LoginComponent/forgot-pass/forgot-pass.co
 import { StudentDashboardComponent } from './Dashboard/student-dashboard/student-dashboard.component';
 import { CalenderComponent } from './Dashboard/calender/calender.component';
 import { NotfoundComponent } from './LoginComponent/notfound/notfound.component';
+import { TeacherDashboardComponent } from './Dashboard/teacher-dashboard/teacher-dashboard.component';
+import { ViewComponent } from './Dashboard/view/view.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/student', pathMatch: 'full' },
@@ -16,6 +18,8 @@ export const routes: Routes = [
   { path: 'forgotpass', component: ForgotPassComponent },
   { path: 'dashboard', component: StudentDashboardComponent},
   { path: 'dashboard/calendar', component: CalenderComponent},
+  { path: 'teacherd', component: TeacherDashboardComponent},
+  { path: 'teacherd/view', component: ViewComponent},
   { path: '**', component: NotfoundComponent },
 ];
 
