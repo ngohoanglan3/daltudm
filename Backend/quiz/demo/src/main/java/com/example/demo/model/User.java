@@ -6,12 +6,15 @@ import lombok.ToString;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 // import com.fasterxml.jackson.annotation.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -26,11 +29,12 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @Column(name = "user_id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer user_id;
 
     @ManyToOne
     @JoinColumn(name="role_id", nullable=false)
-    @JsonManagedReference
+    @JsonBackReference
     private Role role;
 
     @Column(name="name")

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2024 at 12:05 PM
+-- Generation Time: May 28, 2024 at 11:26 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -133,18 +133,21 @@ CREATE TABLE `user` (
   `name` varchar(50) NOT NULL,
   `gender` tinyint(4) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `username` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `role_id`, `name`, `gender`, `email`, `password`) VALUES
-(1, 1, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa', 1, 'fuck@gmail.com ', '1234'),
-(2, 1, 'Tran Van A', 1, 'asdasd@gmail.com', 'abc123'),
-(3, 1, 'Tran Van A', 1, 'jkfsiudfh@gmail.com', '123456'),
-(4, 2, 'Hoang Thi C', 2, 'asfsdfhou@gmail.com', 'sadad');
+INSERT INTO `user` (`user_id`, `role_id`, `name`, `gender`, `email`, `password`, `username`) VALUES
+(1, 1, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa', 1, 'fuck@gmail.com ', '$2a$12$Az33JBTvRXVoF6/MohyCcuOhZgCx4OF1ApmOnzmT1/NKnuqI72wE.', 'James'),
+(2, 1, 'Tran Van A', 1, 'asdasd@gmail.com', '$2a$12$nFkyVKZeDgVlY/wJHkmJROaEQfG64LXQ7IfHUYyl6ug6rJUpDJ5SW', 'Hung'),
+(3, 1, 'Tran Van A', 1, 'jkfsiudfh@gmail.com', '$2a$12$cWQzpZ/TLi.mII6MqeFfPeTl4L8CiL24F9UxdkSffjfhOpIPoJk2e', 'Lan'),
+(4, 2, 'Hoang Thi C', 2, 'asfsdfhou@gmail.com', '$2a$12$ycAvW97q3yr9U7S3alY6FeecjZbti7KySJhWj5dhYN50IgyIX2UZW', 'Quoc Anh'),
+(5, 2, 'admin', 1, 'admin@admin.com', '$2a$10$gqHrslMttQWSsDSVRTK1OehkkBiXsJ/a4z2OURU./dizwOQu5Lovu', 'admin'),
+(6, 2, 'user', 1, 'user@user.com', '$2a$10$QGnXmQezCIGYjCmEGUIcveeFOCJJ2YJ293soKKPUfvLVrGGAuK.fK', 'user');
 
 -- --------------------------------------------------------
 
@@ -206,6 +209,7 @@ ALTER TABLE `role`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`),
   ADD KEY `role_id` (`role_id`);
 
 --
@@ -254,7 +258,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

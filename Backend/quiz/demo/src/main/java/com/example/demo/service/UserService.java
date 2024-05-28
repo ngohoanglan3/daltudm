@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 
@@ -27,6 +28,9 @@ import jakarta.transaction.Transactional;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     private AuthenticationManager authenticationManager;
 
@@ -76,13 +80,14 @@ public class UserService {
     }
 
     public void addNew(UserDTO dto) {
-        if (userRepository.findById(dto.getUser_id()).isEmpty() && userRepository.findByUsername(dto.getUsername()) == null)
+        if (userRepository.findByUsername(dto.getUsername()) == null)
         {
             User entity = new User();
             BeanUtils.copyProperties(dto, entity);
+            entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 
             userRepository.save(entity);
-        }else throw new myException("User bi trung ten hoac id!");
+        }else throw new myException("User bi trung ten!");
 
     }
 
