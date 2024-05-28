@@ -14,7 +14,9 @@ import com.example.demo.model.Role;
 import com.example.demo.service.AuthService;
 import com.example.demo.service.UserService;
 
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @RestController
 public class UserController {
     private AuthService authService;
@@ -61,7 +63,7 @@ public class UserController {
     }
 
     @PostMapping(route + "/Login")
-    public ResponseEntity<JwtAuthResponse> login(@RequestParam UserLogin loginDto) {
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody UserLogin loginDto) {
         String token = authService.login(loginDto);
 
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();

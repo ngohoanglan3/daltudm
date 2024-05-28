@@ -6,6 +6,8 @@ import lombok.ToString;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 // import com.fasterxml.jackson.annotation.*;
 
 import jakarta.persistence.Column;
@@ -28,6 +30,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name="role_id", nullable=false)
+    @JsonManagedReference
     private Role role;
 
     @Column(name="name")

@@ -18,7 +18,6 @@ import jakarta.persistence.Table;
 @Setter
 @Entity
 @Table(name = "role")
-@ToString
 public class Role {
     @Id
     @Column(name = "role_id")
@@ -27,7 +26,7 @@ public class Role {
     @Column(name="role_name")
     private String role_name;
     
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy="role")
     private Set<User> users;
 }

@@ -2,7 +2,6 @@ package com.example.demo.DTO;
 
 import java.util.Set;
 
-import com.example.demo.model.Answer;
 import com.example.demo.model.Exam;
 
 import lombok.Getter;
