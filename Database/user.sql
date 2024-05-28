@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2024 at 09:28 AM
+-- Generation Time: May 28, 2024 at 11:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -42,10 +42,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `role_id`, `name`, `gender`, `email`, `password`, `username`) VALUES
-(1, 1, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa', 1, 'fuck@gmail.com ', '1234', 'James'),
-(2, 1, 'Tran Van A', 1, 'asdasd@gmail.com', 'abc123', 'Hung'),
-(3, 1, 'Tran Van A', 1, 'jkfsiudfh@gmail.com', '123456', 'Lan'),
-(4, 2, 'Hoang Thi C', 2, 'asfsdfhou@gmail.com', 'sadad', 'Quoc Anh');
+(1, 1, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa', 1, 'fuck@gmail.com ', '$2a$12$Az33JBTvRXVoF6/MohyCcuOhZgCx4OF1ApmOnzmT1/NKnuqI72wE.', 'James'),
+(2, 1, 'Tran Van A', 1, 'asdasd@gmail.com', '$2a$12$nFkyVKZeDgVlY/wJHkmJROaEQfG64LXQ7IfHUYyl6ug6rJUpDJ5SW', 'Hung'),
+(3, 1, 'Tran Van A', 1, 'jkfsiudfh@gmail.com', '$2a$12$cWQzpZ/TLi.mII6MqeFfPeTl4L8CiL24F9UxdkSffjfhOpIPoJk2e', 'Lan'),
+(4, 2, 'Hoang Thi C', 2, 'asfsdfhou@gmail.com', '$2a$12$ycAvW97q3yr9U7S3alY6FeecjZbti7KySJhWj5dhYN50IgyIX2UZW', 'Quoc Anh'),
+(5, 2, 'admin', 1, 'admin@admin.com', '$2a$10$gqHrslMttQWSsDSVRTK1OehkkBiXsJ/a4z2OURU./dizwOQu5Lovu', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -67,7 +68,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
