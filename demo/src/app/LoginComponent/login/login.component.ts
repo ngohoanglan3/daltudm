@@ -19,10 +19,11 @@ export class LoginComponent {
   }
 
   onLogin() {
-    this.http.post('https://freeapi.miniprojectideas.com/api/User/Login', this.loginObj).subscribe((res: any)=>{
+    debugger;
+    this.http.post('http://localhost:8081/User/Login', this.loginObj).subscribe((res: any)=>{
       if(res.result) {
         localStorage.setItem('token', res.data.token)
-        this.route.navigateByUrl('/dashboard')
+        this.route.navigateByUrl('student/dashboard')
       }
       else {
         this.route.navigateByUrl('/')
@@ -30,20 +31,16 @@ export class LoginComponent {
     })
   }
 
-  student(): void {
-    this.route.navigateByUrl('/student');
+  studentUrl() {
+    this.route.navigateByUrl("/login");
   }
 
-  teacher(): void {
-    this.route.navigateByUrl('/teacher');
+  teacherUrl() {
+    this.route.navigateByUrl("/teacher");
   }
 
-  admin(): void {
-    this.route.navigateByUrl('/admin');
-  }
-
-  forgotPass() {
-    this.route.navigateByUrl('/forgotpass');
+  adminUrl() {
+    this.route.navigateByUrl("/admin");
   }
 }
 

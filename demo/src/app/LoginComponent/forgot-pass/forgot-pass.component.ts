@@ -9,5 +9,4 @@ import { LoginComponent } from '../login/login.component';
     imports: [LoginComponent]
 })
 export class ForgotPassComponent extends LoginComponent {
-
 }

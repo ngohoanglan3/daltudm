@@ -36,6 +36,7 @@
   width: 100%;
   border-radius: 5px;
   border: 1.5px solid white;
+  cursor: pointer;
 }
 
 .line {
