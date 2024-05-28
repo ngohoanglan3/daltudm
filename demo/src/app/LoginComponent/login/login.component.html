@@ -7,27 +7,25 @@
         <div class="line"></div>
         <h1>ĐĂNG NHẬP VÀO TÀI KHOẢN</h1>
         <h3><ng-content select="[title]"></ng-content></h3>
-        <div class="section">
+        <form class="section" action="#">
             <h4>Tài Khoản</h4>
             <div class="User">
                 <ng-content class="Icon" select="[UserIcon]"></ng-content>
-                <input id="username" type="text">
+                <input id="username" type="username" [(ngModel)]="loginObj.username" name="username" required> 
             </div>
             <h4><ng-content select="[pass]"></ng-content></h4>
             <div class="Password">
                 <ng-content class="Icon" select="[PassIcon]"></ng-content>                
-                <input id="password" type="password">
+                <input id="password" type="password" [(ngModel)]="loginObj.password" name="password" required>
             </div>            
             <ng-content select="[forgotPass]"></ng-content>            
-            <button>ĐĂNG NHẬP</button>
-        </div>
+            <button type="button" (click)="onLogin()">ĐĂNG NHẬP</button>
+        </form>
         <div class="line"></div>
         <div class="other">
             <ng-content select="[student]"></ng-content>
             <ng-content select="[teacher]"></ng-content>
             <ng-content select="[admin]"></ng-content>
-            <!-- <a class="teacher" (click)="teacher()">Giáo Viên</a> <br>
-            <a class="admin" (click)="admin()">Admin</a> -->
         </div>
     </div>
 </div>

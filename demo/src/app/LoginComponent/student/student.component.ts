@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from "../login/login.component";
+import { LoginComponent } from '../login/login.component';
 
 @Component({
     selector: 'app-student',
@@ -9,5 +9,5 @@ import { LoginComponent } from "../login/login.component";
     imports: [LoginComponent]
 })
 export class StudentComponent extends LoginComponent {
-    override title = 'Sinh Viên';
+
 }

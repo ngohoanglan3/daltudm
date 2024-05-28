@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <img class="huce_logo" src="/assets/huce_logo.png" alt="">
+        </div>
+        <div class="line">
+            <ul>
+                <li (click)="openBar()"><a>Ngân Hàng Câu Hỏi</a></li>
+                <li><a href="">Đề Thi</a></li>
+                <li><a href="">Sinh Viên</a></li>
+                <li><a href="">Thống Kê</a></li>
+            </ul>
+        </div>
+        <button type="button" class="menu-section" (click)="toggleBar()">
+            <div class="menu-icon"></div>
+        </button>
+    </div>
+    <div class="main-content">
+        <ng-content class="content" select="[content]"></ng-content>
+    </div>    
+    <div class="menu" *ngIf="showBar">
+        <div class="outClose"><button class="close" type="button" (click)="closeBar()"></button></div>
+        <div class="info"><a href="">thông tin cá nhân</a></div>
+        <div class="changePass"><a href="">đổi mật khẩu</a></div>
+        <div class="logout"><a href="">đăng xuất</a></div>
+        <div class="menu-main__overlay-right"></div>
+    </div>
+    <div class="left-menu" *ngIf="open">
+        <div class="hide"><button class="close" type="button" (click)="hide()"></button></div>
+        <div class="view"><a href="teacherd/view">xem câu hỏi</a></div>
+        <div class="update"><a href="">nhập câu hỏi</a></div>
+        <div class="menu-main__overlay-left"></div>
+    </div>
+</div>

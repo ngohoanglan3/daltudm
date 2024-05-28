@@ -1,46 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-  font-family: "JetBrains Mono", monospace;
-  margin: 0px;
-  padding: 0px;
-}
-.Icon {
-  height: 5vh;
-  margin-right: 10px;
-}
 
-.title {
-  margin: 0px;
-}
-
-.ForgotPass {
-  display: inline-block;
-  text-align: right;
-}
-
-.ForgotPass:hover {
-  color: rgb(217, 30, 54);
-  text-decoration: underline;
-}
-
-.other {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  font-size: 13px;
-}
-
-.student:hover {
-  color: rgb(217, 30, 54);
-  text-decoration: underline;
-}
-
-.teacher:hover {
-  color: rgb(217, 30, 54);
-  text-decoration: underline;
-}
-
-.admin:hover {
-  color: rgb(217, 30, 54);
-  text-decoration: underline;
-}
+* {
+    font-family: "JetBrains Mono", monospace;
+  }
+  
+  body {
+    margin: 0px;
+    padding: 0px;
+  }
+  .Icon {
+    height: 5vh;
+    margin-right: 10px;
+  }
+  
+  .title {
+    margin: 0px;
+  }
+  
+  .ForgotPass {
+    display: inline-block;
+    text-align: right;
+  }
+  
+  .ForgotPass:hover {
+    color: rgb(217, 30, 54);
+    text-decoration: underline;
+  }
+  
+  .other {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 13px;
+  }
+  
+  .student:hover {
+    color: rgb(217, 30, 54);
+    text-decoration: underline;
+  }
+  
+  .teacher:hover {
+    color: rgb(217, 30, 54);
+    text-decoration: underline;
+  }
+  
+  .admin:hover {
+    color: rgb(217, 30, 54);
+    text-decoration: underline;
+  }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

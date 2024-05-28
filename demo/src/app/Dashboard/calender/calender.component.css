@@ -1,0 +1,47 @@
+* {
+  color: white;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 80px);
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.calendar, .upcomming {
+  background-color: rgba(0, 0, 0, 0.2);
+  /* backdrop-filter: blur(5px); */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.calendar {
+    width: 400px;
+    height: auto;    
+}
+
+.upcomming {
+    width: 700px;
+    height: 500px;
+}
+
+.demo-inline-calendar-card {
+  background-color: transparent;
+}
+
+::ng-deep .mat-calendar {
+  filter: invert(1) !important;
+}
+
+::ng-deep .mat-calendar-controls .mat-mdc-icon-button.mat-mdc-button-base {
+  filter: invert(1) !important;
+}
+
+.title {
+  position: relative;
+  top: 30px;
+  left: 20px;
+  font-size: 20px;
+}
