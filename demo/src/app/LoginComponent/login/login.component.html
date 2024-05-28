@@ -19,7 +19,7 @@
                 <input id="password" type="password" [(ngModel)]="loginObj.password" name="password" required>
             </div>            
             <ng-content select="[forgotPass]"></ng-content>            
-            <button type="button" (click)="onLogin()">ĐĂNG NHẬP</button>
+            <ng-content select="[button]"></ng-content>
         </form>
         <div class="line"></div>
         <div class="other">

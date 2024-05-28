@@ -1,0 +1,82 @@
+* {
+  color: black;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 80px);
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.catogery,
+.question {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.catogery {
+  width: 350px;
+  height: 500px;
+}
+
+.question {
+  width: 850px;
+  height: 500px;
+}
+
+.form {
+  width: 280px;
+  position: relative;
+  left: 20px;
+  border-radius: 5px;
+}
+
+.catogery-search {
+  width: 100%;
+}
+
+.top-tool {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.create-question {
+  background-color: #3fa6f1;
+  color: white !important;
+}
+
+.search-question {
+  height: 30px;
+  width: 300px;
+  border-radius: 10px;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  padding: 0px 10px;
+}
+
+.bottom-tool {
+  width: 100%;
+  height: calc(100% - 70px);
+}
+
+/* table {
+  height: 400px;
+  width: 550px;
+  max-width: 100%;
+  overflow: auto;
+} */
+::ng-deep .mat-mdc-table {
+  width: 100%;
+  max-height: 300px;
+  overflow: auto;
+}
+
+::ng-deep .mat-column-name {
+  height: 100px;
+}

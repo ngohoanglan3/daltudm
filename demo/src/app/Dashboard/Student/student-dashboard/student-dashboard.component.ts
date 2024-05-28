@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -11,11 +12,17 @@ import { CommonModule } from '@angular/common';
 export class StudentDashboardComponent {
   showBar = false;
 
+  constructor(private route: Router) {}
+
   toggleBar() {
     this.showBar = !this.showBar;
   }
 
   closeBar() {
     this.showBar = false;
+  }
+
+  toDashboard() {
+    this.route.navigateByUrl('/student/dashboard');
   }
 }

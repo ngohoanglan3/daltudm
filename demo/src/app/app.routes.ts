@@ -4,22 +4,22 @@ import { StudentComponent } from './LoginComponent/student/student.component';
 import { AdminComponent } from './LoginComponent/admin/admin.component';
 import { NgModule } from '@angular/core';
 import { ForgotPassComponent } from './LoginComponent/forgot-pass/forgot-pass.component';
-import { StudentDashboardComponent } from './Dashboard/student-dashboard/student-dashboard.component';
-import { CalenderComponent } from './Dashboard/calender/calender.component';
-import { NotfoundComponent } from './LoginComponent/notfound/notfound.component';
-import { TeacherDashboardComponent } from './Dashboard/teacher-dashboard/teacher-dashboard.component';
-import { ViewComponent } from './Dashboard/view/view.component';
+import { StudentDashboardComponent } from './Dashboard/Student/student-dashboard/student-dashboard.component';
+import { CalenderComponent } from './Dashboard/Student/calender/calender.component';
+import { TeacherDashboardComponent } from './Dashboard/Teacher/teacher-dashboard/teacher-dashboard.component';
+import { ViewComponent } from './Dashboard/Teacher/view/view.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/student', pathMatch: 'full' },
-  { path: 'student', component: StudentComponent },
-  { path: 'teacher', component: TeacherComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', title: 'Đăng Nhập', component: StudentComponent },
+  { path: 'student/dashboard', component: StudentDashboardComponent },
+  { path: 'student/dashboard/calendar', component: CalenderComponent},
+  { path: 'teacher',title: 'Đăng Nhập', component: TeacherComponent },
+  { path: 'teacher/dashboard', component: TeacherDashboardComponent},
+  { path: 'teacher/dashboard/view', component: ViewComponent },
+  { path: 'admin', title: 'Đăng Nhập', component: AdminComponent },
   { path: 'forgotpass', component: ForgotPassComponent },
-  { path: 'dashboard', component: StudentDashboardComponent},
-  { path: 'dashboard/calendar', component: CalenderComponent},
-  { path: 'teacherd', component: TeacherDashboardComponent},
-  { path: 'teacherd/view', component: ViewComponent},
   { path: '**', component: NotfoundComponent },
 ];
 

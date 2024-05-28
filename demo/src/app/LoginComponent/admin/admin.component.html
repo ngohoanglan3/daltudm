@@ -3,6 +3,6 @@
     <p pass>Mật Khẩu</p>
     <img class="Icon" src="/assets/admin.png" alt="" UserIcon>
     <img class="Icon" src="/assets/padlock.png" alt="" PassIcon>
-    <a class="teacher" href="/teacher" teacher>Giáo Viên</a> <br>
-    <a class="student" href="/student" student>Sinh Viên</a>
-</app-login>
+    <a class="teacher" (click)="teacherUrl()" teacher>Giáo Viên</a> <br>
+    <a class="student" (click)="studentUrl()" student>Sinh Viên</a>
+    <button class="send" type="button" button>ĐĂNG NHẬP</button>
