@@ -6,13 +6,20 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
 
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.UserLogin;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.security.JwtTokenProvider;
 
 import jakarta.transaction.Transactional;
 
@@ -21,6 +28,14 @@ import jakarta.transaction.Transactional;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
 
     public List<UserDTO> findAll(){
         return userRepository.findAll()
@@ -65,12 +80,14 @@ public class UserService {
     }
 
     public void addNew(UserDTO dto) {
-        if (userRepository.findById(dto.getUser_id()).isEmpty()){
+        if (userRepository.findByUsername(dto.getUsername()) == null)
+        {
             User entity = new User();
             BeanUtils.copyProperties(dto, entity);
+            entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 
             userRepository.save(entity);
-        }else throw new myException("da co User voi roll " + dto.getUser_id());
+        }else throw new myException("User bi trung ten!");
 
     }
 
@@ -81,4 +98,20 @@ public class UserService {
         BeanUtils.copyProperties(dto, entity);
         userRepository.save(entity);
     }
+    
+    
+    public String login(UserLogin loginDto) {
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsername(),
+                loginDto.getPassword()
+        ));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        return token;
+    }
 }
+
