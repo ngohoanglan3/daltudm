@@ -28,6 +28,8 @@ public class UserDTO {
 
     private String password;
 
+    private String username;
+
     Set<User_Exam> exams;
     
     Set<User_Answer> answers;

@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.UserLogin;
 import com.example.demo.security.*;
 
 import java.util.HashSet;
@@ -22,10 +23,10 @@ public class AuthService {
 
     private JwtTokenProvider jwtTokenProvider;
 
-    public String login(UserDTO loginDto) {
+    public String login(UserLogin loginDto) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getEmail(),
+                loginDto.getUsername(),
                 loginDto.getPassword()
         ));
 

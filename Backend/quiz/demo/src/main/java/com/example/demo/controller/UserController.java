@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.JwtAuthResponse;
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.UserLogin;
 import com.example.demo.model.Role;
 import com.example.demo.service.AuthService;
 import com.example.demo.service.UserService;
@@ -60,7 +61,7 @@ public class UserController {
     }
 
     @PostMapping(route + "/Login")
-    public ResponseEntity<JwtAuthResponse> login(@RequestParam UserDTO loginDto) {
+    public ResponseEntity<JwtAuthResponse> login(@RequestParam UserLogin loginDto) {
         String token = authService.login(loginDto);
 
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();

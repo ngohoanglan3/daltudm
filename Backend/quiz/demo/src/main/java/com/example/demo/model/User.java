@@ -41,6 +41,9 @@ public class User {
 
     @Column(name="password")
     private String password;
+
+    @Column(name="username")
+    private String username;
     
     @OneToMany(mappedBy = "user")
     Set<User_Exam> exams;
