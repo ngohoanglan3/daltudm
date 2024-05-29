@@ -1,17 +1,17 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-export const routeGuard: CanActivateFn = (route, state) => {
+
+export const cantBackGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   const localData = localStorage.getItem('accessToken');
   debugger;
-  if(localData == null) {
-    router.navigateByUrl("/login");
+  if(localData != null) {
+    router.navigateByUrl("/student");
     return false;
   }
   else {
-    // router.navigateByUrl("/student");
     return true;
   }
 };

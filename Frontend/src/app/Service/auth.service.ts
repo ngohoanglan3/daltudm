@@ -18,15 +18,11 @@ export class AuthService {
     return this.http.post(AUTH_API, {username, password}, httpOptions)
   }
 
-  // logout(): Observable<any> {
-  //   return this.http.post
-  // }
   isLoggedIn(): boolean {
     const token = localStorage.getItem('accessToken');
     if (token) {
       return true;
     }
-
     return false;
   }
 }
