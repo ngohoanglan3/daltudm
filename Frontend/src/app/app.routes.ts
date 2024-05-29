@@ -4,11 +4,13 @@ import { StudentDashboardComponent } from './Dashboard/Student/student-dashboard
 import { CalenderComponent } from './Dashboard/Student/calender/calender.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { LoginComponent } from './LoginComponent/login/login.component';
-import { routeGuard } from './Service/route-guard.guard';
 import { ForgotPassComponent } from './LoginComponent/forgot-pass/forgot-pass.component';
-import { cantBackGuard } from './Service/cant-back.guard';
 import { TeacherDashboardComponent } from './Dashboard/Teacher/teacher-dashboard/teacher-dashboard.component';
 import { ViewQuestionComponent } from './Dashboard/Teacher/view-question/view-question.component';
+import { AddQuestionComponent } from './Dashboard/Teacher/add-question/add-question.component';
+import { studentGuard } from './Service/student.guard';
+import { teacherGuard } from './Service/teacher.guard';
+import { cantBackGuard } from './Service/cant-back.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,14 +18,17 @@ export const routes: Routes = [
   { path: 'login', 
     children: [{path: 'forgotPass', title: 'Quên Mật Khẩu', component: ForgotPassComponent}]
    },
-  { path: 'student', title: 'Sinh Viên', component: StudentDashboardComponent, canActivate: [routeGuard]},
+  { path: 'student', title: 'Sinh Viên', component: StudentDashboardComponent, canActivate: [studentGuard]},
   {
-    path: 'student', canActivate: [routeGuard],
+    path: 'student', canActivate: [studentGuard],
     children: [{ path: 'calendar', title: 'Lịch Thi', component: CalenderComponent }],
   },
-  { path: 'teacher', title: 'Giảng Viên', component: TeacherDashboardComponent, canActivate: [routeGuard]},
-  { path: 'teacher', canActivate: [routeGuard],
-    children: [{ path: 'viewQuestion', title: 'Xem Câu Hỏi', component: ViewQuestionComponent}]
+  { path: 'teacher', title: 'Giảng Viên', component: TeacherDashboardComponent, canActivate: [teacherGuard]},
+  { path: 'teacher', canActivate: [teacherGuard],
+    children: [
+      { path: 'viewQuestion', title: 'Xem Câu Hỏi', component: ViewQuestionComponent},
+      { path: 'import', title: 'Nhập File', component: AddQuestionComponent}
+    ]
   },
   { path: '**', component: NotfoundComponent },
 ];

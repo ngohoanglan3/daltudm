@@ -11,24 +11,44 @@
 }
 
 .table {
-  background-color: white;
+  /* background-color: white;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); */
   width: 70vw;
   height: 500px;
 }
 
 .mat-elevation-z8 {
-    max-height: 500px;
-    overflow: auto;
-  }
-  
-  mat-table {
-    width: 100%;
-  }
-  
-  mat-form-field {
-    width: 100%;
-  }
-  
-  
+  height: 450px;
+  background-color: white;
+  overflow: auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-table {
+  vertical-align: middle;
+}
+
+.mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align {
+  height: 0px;
+}
+
+.mat-column-index, .mat-column-select {
+  width: 5%;
+  text-align: center;
+  border-right: 1px solid currentColor;
+}
+
+.mat-column-column1 {
+  width: 50%;
+  text-align: left;
+}
+
+.mat-column-column2, .mat-column-column3, .mat-column-column4, .mat-column-column5 {
+  width: 10%;
+  text-align: left;
+  padding: 10px;
+}

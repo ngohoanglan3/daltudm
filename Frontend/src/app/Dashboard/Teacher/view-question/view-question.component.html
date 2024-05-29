@@ -1,41 +1,60 @@
 <app-teacher-dashboard>
     <div class="container" content>
         <div class="table">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Tìm Kiếm Câu Hỏi" #input>
+            </mat-form-field>
             <div class="mat-elevation-z8">
-                <mat-form-field>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="Tìm Kiếm Câu Hỏi" #input>
-                </mat-form-field>
-
                 <mat-table [dataSource]="dataSource" matSort>
-
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
                     <!-- Column definitions -->
+                    <ng-container matColumnDef="index">
+                        <th mat-header-cell *matHeaderCellDef> STT </th>
+                        <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
+                    </ng-container>
+
                     <ng-container matColumnDef="column1">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 1 </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.column1}} </mat-cell>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Câu Hỏi </th>
+                        <td mat-cell *matCellDef="let row"> {{row.column1}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="column2">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 2 </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.column2}} </mat-cell>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Đáp Án 1 </th>
+                        <td mat-cell *matCellDef="let row"> {{row.column2}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="column3">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 3 </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.column3}} </mat-cell>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Đáp Án 2 </th>
+                        <td mat-cell *matCellDef="let row"> {{row.column3}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="column4">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 4 </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.column4}} </mat-cell>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Đáp Án 3 </th>
+                        <td mat-cell *matCellDef="let row"> {{row.column4}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="column5">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 5 </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.column5}} </mat-cell>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Đáp Án 4 </th>
+                        <td mat-cell *matCellDef="let row"> {{row.column5}} </td>
                     </ng-container>
 
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
                 </mat-table>
             </div>
         </div>

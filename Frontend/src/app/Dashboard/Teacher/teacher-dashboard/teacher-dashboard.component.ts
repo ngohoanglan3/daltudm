@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ViewQuestionService } from '../../../Service/view-question.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -7,11 +8,12 @@ import { Component } from '@angular/core';
   imports: [CommonModule],
   templateUrl: './teacher-dashboard.component.html',
   styleUrl: './teacher-dashboard.component.css',
+  providers: [ViewQuestionService]
 })
 export class TeacherDashboardComponent {
   showBar = false;
   open = false;
-
+  
   Logout() {
     localStorage.clear();    
   }

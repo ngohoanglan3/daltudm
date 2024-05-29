@@ -8,7 +8,7 @@
                 <li (click)="openBar()"><a>Ngân Hàng Câu Hỏi</a></li>
                 <li><a href="">Đề Thi</a></li>
                 <li><a href="">Sinh Viên</a></li>
-                <li><a href="">Thống Kê</a></li>
+                <li><a href="">Thống Kê</a></li>                
             </ul>
         </div>
         <button type="button" class="menu-section" (click)="toggleBar()">
@@ -28,7 +28,7 @@
     <div class="left-menu" *ngIf="open">
         <div class="hide"><button class="close" type="button" (click)="hide()"></button></div>
         <div class="view"><a href="teacher/viewQuestion">xem câu hỏi</a></div>
-        <div class="update"><a href="">nhập câu hỏi</a></div>
+        <div class="update"><a href="teacher/import">nhập câu hỏi</a></div>
         <div class="menu-main__overlay-left"></div>
-    </div>
+    </div>    
 </div>
