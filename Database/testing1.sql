@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2024 at 11:40 AM
+-- Generation Time: May 29, 2024 at 10:10 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -118,8 +118,9 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`role_id`, `role_name`) VALUES
-(1, 'sinh_vien'),
-(2, 'giao_vien');
+(1, 'ROLE_SV'),
+(2, 'ROLE_GV'),
+(3, 'ROLE_ADMIN');
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,7 @@ INSERT INTO `user` (`user_id`, `role_id`, `name`, `gender`, `email`, `password`,
 (2, 1, 'Tran Van A', 1, 'asdasd@gmail.com', '$2a$12$nFkyVKZeDgVlY/wJHkmJROaEQfG64LXQ7IfHUYyl6ug6rJUpDJ5SW', 'Hung'),
 (3, 1, 'Tran Van A', 1, 'jkfsiudfh@gmail.com', '$2a$12$cWQzpZ/TLi.mII6MqeFfPeTl4L8CiL24F9UxdkSffjfhOpIPoJk2e', 'Lan'),
 (4, 2, 'Hoang Thi C', 2, 'asfsdfhou@gmail.com', '$2a$12$ycAvW97q3yr9U7S3alY6FeecjZbti7KySJhWj5dhYN50IgyIX2UZW', 'Quoc Anh'),
-(5, 2, 'admin', 1, 'admin@admin.com', '$2a$10$gqHrslMttQWSsDSVRTK1OehkkBiXsJ/a4z2OURU./dizwOQu5Lovu', 'admin'),
+(5, 3, 'admin', 1, 'admin@admin.com', '$2a$10$gqHrslMttQWSsDSVRTK1OehkkBiXsJ/a4z2OURU./dizwOQu5Lovu', 'admin'),
 (6, 2, 'user', 1, 'user@user.com', '$2a$10$QGnXmQezCIGYjCmEGUIcveeFOCJJ2YJ293soKKPUfvLVrGGAuK.fK', 'user');
 
 -- --------------------------------------------------------
@@ -171,7 +172,10 @@ CREATE TABLE `user_answer` (
 CREATE TABLE `user_exam` (
   `exam_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `score` int(11) NOT NULL
+  `score` int(11) NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `valid` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -252,7 +256,7 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`

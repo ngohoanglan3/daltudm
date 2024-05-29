@@ -26,6 +26,12 @@ public class User_AnswerService {
     @Autowired
     AnswerService answerService;
 
+    @Autowired
+    QuestionService questionService;
+
+    @Autowired
+    UserService userService;
+
     public List<User_AnswerDTO> findAll(){
         return user_AnswerRepository.findAll()
                 .stream()
@@ -62,11 +68,19 @@ public class User_AnswerService {
 
     }
 
-    public void tryaddNew(User_Answer_Cross cross) {
-        User_AnswerDTO dto = new User_AnswerDTO();
+    public void updateProgress(User_Answer_Cross cross){
         User_Answer_Key key = new User_Answer_Key(cross.getUser_id(), cross.getQuestion_id());
-        dto.setId(key);
-        if (user_AnswerRepository.findById(dto.getId()).isEmpty()){
+        User_AnswerDTO check = this.findByKey(key);
+        if (check != null) {
+            Optional<User_Answer> op = user_AnswerRepository.findById(check.getId());
+            User_Answer entity = op.get();
+            BeanUtils.copyProperties(check, entity);
+            user_AnswerRepository.save(entity);
+        }
+        else
+        {
+            User_AnswerDTO dto = new User_AnswerDTO();
+            dto.setId(key);
             dto.setOption_choose(cross.getOption_choose());
             dto.setQuestion(questionService.getQuestion(cross.getQuestion_id()));
             dto.setUser(userService.getUser(cross.getUser_id()));
@@ -74,11 +88,9 @@ public class User_AnswerService {
             BeanUtils.copyProperties(dto, entity);
 
             user_AnswerRepository.save(entity);
-        }else throw new myException("da co!");
+        }
     }
 
-    QuestionService questionService;
-    UserService userService;
     public void addNewByCross(User_Answer_Cross cross) {
         User_AnswerDTO dto = new User_AnswerDTO();
         User_Answer_Key key = new User_Answer_Key(cross.getUser_id(), cross.getQuestion_id());

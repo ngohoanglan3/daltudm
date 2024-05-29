@@ -7,6 +7,9 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,9 +40,10 @@ public class Exam {
     private String description;
 
     @OneToMany(mappedBy="exam")
+    @JsonManagedReference
     private Set<User_Exam> users;
 
-    @OneToMany(mappedBy="exam")
+    @OneToMany(mappedBy="exam", cascade = CascadeType.ALL)
     private Set<Question> qSet;
     
 }

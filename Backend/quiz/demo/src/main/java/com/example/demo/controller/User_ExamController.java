@@ -37,6 +37,12 @@ public class User_ExamController {
 
     }
 
+    public ResponseEntity<?> submitTest(@RequestBody User_ExamDTO dto) {
+        user_ExamService.update(dto);
+
+        return new ResponseEntity<>(null, HttpStatus.valueOf(303));
+    }
+
     @PutMapping(route + "/update")
     public ResponseEntity<?> updateDi(@RequestBody User_ExamDTO dto) {
         user_ExamService.update(dto);

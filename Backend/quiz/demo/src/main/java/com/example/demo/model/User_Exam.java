@@ -36,9 +36,12 @@ public class User_Exam {
     @Column(name = "score")
     private float score;
 
+    @Column(name = "start_time")
     private Instant start_time;
 
+    @Column(name = "end_time")
     private Instant end_time;
 
+    @Column(name = "valid")
     private boolean valid_test;
 }
