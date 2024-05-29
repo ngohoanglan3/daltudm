@@ -37,7 +37,6 @@ public class User_ExamController {
 
     }
 
-    @PutMapping(route + "/submit")
     public ResponseEntity<?> submitTest(@RequestBody User_ExamDTO dto) {
         user_ExamService.update(dto);
 
