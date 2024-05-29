@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.ExamDTO;
@@ -30,7 +31,8 @@ public class ExamController {
         ExamDTO entity = examService.findByRoll(id);
         return entity; 
     } 
-
+    
+    @PreAuthorize("hasRole('GV')")
     @PostMapping(route + "/save")
     public ResponseEntity<?> saveDi(@RequestBody ExamDTO dto) {
         examService.addNew(dto);

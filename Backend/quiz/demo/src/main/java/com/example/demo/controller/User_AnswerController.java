@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,8 +39,9 @@ public class User_AnswerController {
     public ResponseEntity<?> saveDi(@RequestBody List<User_Answer_Cross> cross) {
         int questioncorrect = 0;
         for (User_Answer_Cross user_Answer_Cross : cross) {
+            User_AnswerDTO ss = user_AnswerService.findByCross(user_Answer_Cross);
             user_AnswerService.addNewByCross(user_Answer_Cross);
-            if (user_Answer_Cross.is_correct()) {
+            if (ss.is_correct()) {
                 questioncorrect += 1;
             }
         }
@@ -57,34 +59,13 @@ public class User_AnswerController {
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
 
     }
-
-    @PostMapping(route + "/savebackup")
-    public ResponseEntity<?> saveDiBackup(@RequestBody List<User_AnswerDTO> dto) {
-        int questioncorrect = 0;
-        for (User_AnswerDTO user_AnswerDTO : dto) {
-            user_AnswerService.addNew(user_AnswerDTO);
-            if (user_AnswerDTO.is_correct()) {
-                questioncorrect += 1;
-            }
-        }
-        User_AnswerDTO temp = dto.getFirst();
-        int hmm = temp.getQuestion().getExam().getExam_id();
-        List<QuestionDTO> lDtos = questionController.getbyExamid(hmm);
-        int numbofquest = lDtos.size();
-        float score = 10 * (questioncorrect / numbofquest);
-        User_ExamDTO aa = new User_ExamDTO();
-        aa.setScore(score);
-        aa.setUser(temp.getUser());
-        aa.setExam(temp.getQuestion().getExam());
-        user_ExamController.saveDi(aa);
-
-        return new ResponseEntity<>(null, HttpStatus.valueOf(201));
-
-    }
+    
 
     @PutMapping(route + "/update")
-    public ResponseEntity<?> updateDi(@RequestBody User_AnswerDTO dto) {
-        user_AnswerService.update(dto);
+    public ResponseEntity<?> updateDi(@RequestBody List<User_Answer_Cross> cross) {
+        for (User_Answer_Cross user_Answer_Cross : cross) {
+            user_AnswerService.tryaddNew(user_Answer_Cross);
+        }
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(303));
     }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.QuestionDTO;
+import com.example.demo.DTO.QuestionDTOfull;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Exam;
 import com.example.demo.model.Question;
@@ -71,7 +72,7 @@ public class QuestionService {
                 questionRepository.delete(entity);
     }
 
-    public void addNew(QuestionDTO dto) {
+    public void addNew(QuestionDTOfull dto) {
         if (questionRepository.findById(dto.getQuestion_id()).isEmpty()){
             Question entity = new Question();
             BeanUtils.copyProperties(dto, entity);

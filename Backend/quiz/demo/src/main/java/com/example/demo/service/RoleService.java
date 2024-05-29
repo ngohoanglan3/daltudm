@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.DTO.RoleDTO;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Role;
+import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 
 import jakarta.transaction.Transactional;
@@ -40,6 +42,14 @@ public class RoleService {
                 .orElseThrow(() -> new myException("khong tim thay Role voi so roll " + roll));
 
         return toDto(entity);
+    }
+    
+
+    public RoleDTO findByname(String name) {
+        List<Role> entity = roleRepository.findByName(name);
+        Role role = entity.getFirst();
+
+        return toDto(role);
     }
 
     public void xoaDi(int roll) {

@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -20,6 +22,8 @@ import jakarta.persistence.Table;
 @Setter
 @Entity
 @Table(name = "role")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role {
     @Id
     @Column(name = "role_id")
@@ -27,7 +31,7 @@ public class Role {
     private Integer role_id;
 
     @Column(name="role_name")
-    private String role_name;
+    private String name;
     
     @JsonManagedReference
     @OneToMany(mappedBy="role")
