@@ -40,8 +40,17 @@ export class LoginComponent {
     const { username, password } = this.form
     this.auth.login(username, password).subscribe((response: any) => {
       this.logFail = false;
-      localStorage.setItem('accessToken', response.accessToken)
-      this.route.navigateByUrl("/student");
+      localStorage.setItem('accessToken', response.accessToken);
+      localStorage.setItem('role', response.role.role_id);
+      if (response.role.role_id == 1) {
+        this.route.navigateByUrl("/student");
+      }
+      else if(response.role.role_id == 2) {
+        this.route.navigateByUrl("/teacher");
+      }
+      else if(response.role.role_id == 3) {
+
+      }      
     },
     Error => {
       this.logFail = true;

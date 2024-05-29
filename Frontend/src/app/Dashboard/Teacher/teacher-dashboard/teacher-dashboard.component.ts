@@ -12,6 +12,10 @@ export class TeacherDashboardComponent {
   showBar = false;
   open = false;
 
+  Logout() {
+    localStorage.clear();    
+  }
+
   toggleBar() {
     this.showBar = !this.showBar;
   }

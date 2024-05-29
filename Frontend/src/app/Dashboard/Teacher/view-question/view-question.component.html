@@ -1,0 +1,43 @@
+<app-teacher-dashboard>
+    <div class="container" content>
+        <div class="table">
+            <div class="mat-elevation-z8">
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Tìm Kiếm Câu Hỏi" #input>
+                </mat-form-field>
+
+                <mat-table [dataSource]="dataSource" matSort>
+
+                    <!-- Column definitions -->
+                    <ng-container matColumnDef="column1">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 1 </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.column1}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="column2">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 2 </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.column2}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="column3">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 3 </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.column3}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="column4">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 4 </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.column4}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="column5">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Column 5 </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.column5}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </div>
+    </div>
+</app-teacher-dashboard>

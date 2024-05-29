@@ -5,13 +5,11 @@ export const routeGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   const localData = localStorage.getItem('accessToken');
-  debugger;
   if(localData == null) {
     router.navigateByUrl("/login");
     return false;
   }
   else {
-    // router.navigateByUrl("/student");
     return true;
   }
 };
