@@ -45,35 +45,9 @@ export class LoginComponent {
     },
     Error => {
       this.logFail = true;
-    }
-      // {
-      // next: data => {
-      //   this.logFail = false;
-      //   this.route.navigateByUrl("/student");
-      // },
-      // error: err => {
-      //   this.logFail = true;
-      // }
-      // }
+    }      
     )
   }
-  
-  // onLogin() {
-  //   // debugger;
-  //   this.http.post('http://localhost:8081/User/Login', this.loginObj).subscribe(
-  //     (response: any) => {
-  //       localStorage.setItem(
-  //         'loginTOken',
-  //         JSON.stringify(response.accessToken)
-  //       );
-  //       this.route.navigateByUrl('/student');
-  //       console.log(response);
-  //     },
-  //     (error) => {
-  //       this.logFail = true;
-  //     }
-  //   );
-  // }
 
   clickEvent(event: MouseEvent) {
     this.hide = !this.hide;

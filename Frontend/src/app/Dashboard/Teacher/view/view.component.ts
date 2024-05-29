@@ -4,31 +4,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import {MatTableModule} from '@angular/material/table';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
-
-/**
- * @title Flex table where one column's cells has a greater height than others.
- */
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-view',
@@ -41,10 +18,35 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
   ],
 })
 export class ViewComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns = [
+    'question',
+    'answer1',
+    'answer2',
+    'answer3',
+    'answer4',
+    'correct',
+  ];
+  dataSource = QUESTION_DATA;
 }
+
+export interface QuestionData {
+  question: string;
+  answer1: string;
+  answer2: string;
+  answer3: string;
+  answer4: string;
+  correct: string;
+}
+
+const QUESTION_DATA: QuestionData[] = [
+  {question: 'Câu hỏi 1', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correct: 'Đáp án đúng'},
+  {question: 'Which of the following is true about the characteristics of abstract data types?', answer1: 'It exports a type.', answer2: 'It exports a set of operations.', answer3: 'True, True', answer4: 'False, False', correct: 'Tùy vào đáp án đúng'},
+  {question: 'Which of the following data structures are indexed structures?', answer1: 'Linear arrays', answer2: 'Linked lists', answer3: 'Queue', answer4: 'Stack', correct: 'Tùy vào đáp án đúng'},
+  {question: 'Operations on a data structure may be …..', answer1: 'creation', answer2: 'destruction', answer3: 'selection', answer4: 'all of the above', correct: 'Tùy vào đáp án đúng'},
+  {question: 'Which of the following are the operations applicable an primitive data structures?', answer1: 'create', answer2: 'destroy', answer3: 'update', answer4: 'all of the above', correct: 'Tùy vào đáp án đúng'},
+];
