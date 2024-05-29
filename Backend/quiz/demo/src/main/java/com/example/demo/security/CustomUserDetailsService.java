@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         User user = userRepository.findByUsername(Username);
 
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName().toString());
         List<SimpleGrantedAuthority> updatedAuthorities = new ArrayList<SimpleGrantedAuthority>();
         updatedAuthorities.add(authority);
         Set<GrantedAuthority> authorities = updatedAuthorities.stream().collect(Collectors.toSet());

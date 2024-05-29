@@ -23,6 +23,9 @@ public class User_AnswerService {
     @Autowired
     User_AnswerRepository user_AnswerRepository;
 
+    @Autowired
+    AnswerService answerService;
+
     public List<User_AnswerDTO> findAll(){
         return user_AnswerRepository.findAll()
                 .stream()
@@ -59,6 +62,21 @@ public class User_AnswerService {
 
     }
 
+    public void tryaddNew(User_Answer_Cross cross) {
+        User_AnswerDTO dto = new User_AnswerDTO();
+        User_Answer_Key key = new User_Answer_Key(cross.getUser_id(), cross.getQuestion_id());
+        dto.setId(key);
+        if (user_AnswerRepository.findById(dto.getId()).isEmpty()){
+            dto.setOption_choose(cross.getOption_choose());
+            dto.setQuestion(questionService.getQuestion(cross.getQuestion_id()));
+            dto.setUser(userService.getUser(cross.getUser_id()));
+            User_Answer entity = new User_Answer();
+            BeanUtils.copyProperties(dto, entity);
+
+            user_AnswerRepository.save(entity);
+        }else throw new myException("da co!");
+    }
+
     QuestionService questionService;
     UserService userService;
     public void addNewByCross(User_Answer_Cross cross) {
@@ -69,7 +87,6 @@ public class User_AnswerService {
             dto.setOption_choose(cross.getOption_choose());
             dto.setQuestion(questionService.getQuestion(cross.getQuestion_id()));
             dto.setUser(userService.getUser(cross.getUser_id()));
-            dto.set_correct(cross.is_correct());
             User_Answer entity = new User_Answer();
             BeanUtils.copyProperties(dto, entity);
 

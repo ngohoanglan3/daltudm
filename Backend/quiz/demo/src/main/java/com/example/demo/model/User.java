@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -26,6 +28,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "user")
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @Column(name = "user_id")

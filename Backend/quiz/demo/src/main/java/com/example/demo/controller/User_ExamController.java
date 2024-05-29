@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class User_ExamController {
         return entity; 
     } 
 
-    @PostMapping(route + "/save")
+    @PostMapping({route + "/save", route + "/begin"})
     public ResponseEntity<?> saveDi(User_ExamDTO dto) {
         user_ExamService.addNew(dto);
 

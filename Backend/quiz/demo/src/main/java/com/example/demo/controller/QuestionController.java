@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.QuestionDTO;
+import com.example.demo.DTO.QuestionDTOfull;
 import com.example.demo.service.QuestionService;
 
 @RestController
@@ -35,8 +37,17 @@ public class QuestionController {
 
 
     @PostMapping(route + "/save")
-    public ResponseEntity<?> saveDi(@RequestBody QuestionDTO dto) {
+    public ResponseEntity<?> saveDi(@RequestBody QuestionDTOfull dto) {
         questionService.addNew(dto);
+
+        return new ResponseEntity<>(null, HttpStatus.valueOf(201));
+
+    }
+
+    @PostMapping(route + "/savemul")
+    public ResponseEntity<?> saveDiMul(@RequestBody Set<QuestionDTOfull> dto) {
+        for(QuestionDTOfull qOfull: dto)
+            questionService.addNew(qOfull);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
 

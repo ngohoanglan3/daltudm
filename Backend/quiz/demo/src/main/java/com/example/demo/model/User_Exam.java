@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.Instant;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -33,4 +35,10 @@ public class User_Exam {
 
     @Column(name = "score")
     private float score;
+
+    private Instant start_time;
+
+    private Instant end_time;
+
+    private boolean valid_test;
 }
