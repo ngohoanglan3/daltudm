@@ -54,7 +54,17 @@ public class User_AnswerController {
         aa.setScore(score);
         aa.setUser(temp.getUser());
         aa.setExam(temp.getQuestion().getExam());
-        user_ExamController.saveDi(aa);
+        user_ExamController.submitTest(aa);
+
+        return new ResponseEntity<>(null, HttpStatus.valueOf(201));
+
+    }
+
+    @PostMapping(route + "/saveProgress")
+    public ResponseEntity<?> saveinProgress(@RequestBody List<User_Answer_Cross> cross) {
+        for (User_Answer_Cross user_Answer_Cross : cross) {
+            user_AnswerService.updateProgress(user_Answer_Cross);
+        }
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
 
@@ -64,7 +74,7 @@ public class User_AnswerController {
     @PutMapping(route + "/update")
     public ResponseEntity<?> updateDi(@RequestBody List<User_Answer_Cross> cross) {
         for (User_Answer_Cross user_Answer_Cross : cross) {
-            user_AnswerService.tryaddNew(user_Answer_Cross);
+            user_AnswerService.addNewByCross(user_Answer_Cross);
         }
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(303));

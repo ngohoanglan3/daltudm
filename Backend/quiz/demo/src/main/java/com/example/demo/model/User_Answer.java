@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -24,11 +26,13 @@ public class User_Answer {
     @ManyToOne
     @MapsId("user_id")
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     User user;
 
     @ManyToOne
     @MapsId("question_id")
     @JoinColumn(name = "question_id")
+    @JsonBackReference
     Question question;
 
     @Column(name="option_choose")

@@ -1,11 +1,8 @@
 package com.example.demo.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.*;
@@ -23,7 +20,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "role")
 @NoArgsConstructor
-@AllArgsConstructor
 public class Role {
     @Id
     @Column(name = "role_id")
@@ -33,7 +29,7 @@ public class Role {
     @Column(name="role_name")
     private String name;
     
-    @JsonManagedReference
     @OneToMany(mappedBy="role")
+    @JsonManagedReference
     private Set<User> users;
 }

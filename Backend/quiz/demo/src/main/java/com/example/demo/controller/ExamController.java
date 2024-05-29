@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.ExamDTO;
+import com.example.demo.DTO.QuestionDTOfull;
+import com.example.demo.service.AnswerService;
 import com.example.demo.service.ExamService;
 import com.example.demo.service.QuestionService;
 
@@ -20,6 +23,9 @@ public class ExamController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    AnswerService AnswerService;
     
     @GetMapping(route + "/getAll")
     public List<ExamDTO> findAll() {
@@ -38,7 +44,6 @@ public class ExamController {
         examService.addNew(dto);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
-
     }
 
     @PutMapping(route + "/update")

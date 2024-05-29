@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class Question {
     @JsonIgnore
     private Exam exam;
 
-    @OneToMany(mappedBy="question")
+    @OneToMany(mappedBy="question", cascade = CascadeType.ALL)
     private Set<Answer> aSet;
 
 }
