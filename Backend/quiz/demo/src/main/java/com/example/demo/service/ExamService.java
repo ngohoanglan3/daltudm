@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.ExamDTO;
+import com.example.demo.DTO.ExamOnlyDTO;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Exam;
 import com.example.demo.repository.ExamRepository;
@@ -33,6 +34,12 @@ public class ExamService {
         BeanUtils.copyProperties(entity, dto);
         return dto;
     }
+
+    private ExamOnlyDTO toDtoNoQuestion(Exam entity) {
+        ExamOnlyDTO dto = new ExamOnlyDTO();
+        BeanUtils.copyProperties(entity, dto);
+        return dto;
+    }
     
 
     public ExamDTO findByRoll(int roll) {
@@ -40,6 +47,14 @@ public class ExamService {
                 .orElseThrow(() -> new myException("khong tim thay Exam voi so roll " + roll));
 
         return toDto(entity);
+    }
+    
+
+    public ExamOnlyDTO findByRollWithoutQuestion(int roll) {
+        Exam entity = examRepository.findById(roll)
+                .orElseThrow(() -> new myException("khong tim thay Exam voi so roll " + roll));
+
+        return toDtoNoQuestion(entity);
     }
 
     public void xoaDi(int roll) {

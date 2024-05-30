@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.ExamDTO;
+import com.example.demo.DTO.ExamOnlyDTO;
 import com.example.demo.DTO.QuestionDTOfull;
 import com.example.demo.service.AnswerService;
 import com.example.demo.service.ExamService;
@@ -33,8 +34,8 @@ public class ExamController {
     }
 
     @GetMapping(route + "/{id}") 
-    public ExamDTO get(@PathVariable int id) { 
-        ExamDTO entity = examService.findByRoll(id);
+    public ExamOnlyDTO get(@PathVariable int id) { 
+        ExamOnlyDTO entity = examService.findByRollWithoutQuestion(id);
         return entity; 
     } 
     

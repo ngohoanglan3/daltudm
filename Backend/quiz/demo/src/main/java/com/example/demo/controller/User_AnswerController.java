@@ -36,16 +36,23 @@ public class User_AnswerController {
     } 
 
     @PostMapping("/submit")
-    public ResponseEntity<?> saveDi(@RequestBody List<User_Answer_Cross> cross) {
+    public ResponseEntity<?> saveDi(@RequestBody(required=false) List<User_Answer_Cross> cross) {
         int questioncorrect = 0;
-        for (User_Answer_Cross user_Answer_Cross : cross) {
-            User_AnswerDTO ss = user_AnswerService.findByCross(user_Answer_Cross);
-            user_AnswerService.addNewByCross(user_Answer_Cross);
-            if (ss.is_correct()) {
-                questioncorrect += 1;
+        User_AnswerDTO temp;
+        if(!cross.isEmpty())
+        {
+            for (User_Answer_Cross user_Answer_Cross : cross) {
+                User_AnswerDTO ss = user_AnswerService.findByCross(user_Answer_Cross);
+                user_AnswerService.addNewByCross(user_Answer_Cross);
+                if (ss.is_correct()) {
+                    questioncorrect += 1;
+                }
             }
+            temp = user_AnswerService.findByCross(cross.getFirst());
         }
-        User_AnswerDTO temp = user_AnswerService.findByCross(cross.getFirst());
+        else{
+            temp = user_AnswerService.findByCross(cross.getFirst());
+        }
         int hmm = temp.getQuestion().getExam().getExam_id();
         List<QuestionDTO> lDtos = questionController.getbyExamid(hmm);
         int numbofquest = lDtos.size();

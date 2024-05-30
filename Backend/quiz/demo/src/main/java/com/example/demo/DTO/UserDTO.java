@@ -17,8 +17,10 @@ public class UserDTO {
     private Integer user_id;
 
     private String role_name;
+    
+    private Role role;
 
-    private String name;
+    // private String name;
 
     private int gender;
 
