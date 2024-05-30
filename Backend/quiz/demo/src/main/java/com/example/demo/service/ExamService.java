@@ -29,6 +29,14 @@ public class ExamService {
                 .collect(Collectors.toList());
     }
 
+
+    public List<ExamDTO> findAllNoQue(){
+        return examRepository.findAll()
+                .stream()
+                .map(this::toDtoNoQuestion)
+                .collect(Collectors.toList());
+    }
+
     private ExamDTO toDto(Exam entity) {
         ExamDTO dto = new ExamDTO();
         BeanUtils.copyProperties(entity, dto);
