@@ -4,9 +4,9 @@ import { CanActivateFn, Router } from '@angular/router';
 export const teacherGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
-  const localData = localStorage.getItem('accessToken');
+  const localData = sessionStorage.getItem('accessToken');
   if (localData != null) {
-    if (localStorage.getItem('role') == '2') {
+    if (sessionStorage.getItem('role') == '2') {
       return true;
     } else {
       router.navigate(['/login']);

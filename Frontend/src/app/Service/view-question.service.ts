@@ -11,7 +11,7 @@ export class ViewQuestionService {
   getData() {
     const url = 'http://localhost:8081/Question/getAll'; // Thay đổi URL này thành URL của API bạn muốn gọi
 
-    const token = localStorage.getItem('accessToken');
+    const token = sessionStorage.getItem('accessToken');
 
     // Tạo một đối tượng HttpHeaders mới và thêm header bạn muốn gửi
     const headers = new HttpHeaders({

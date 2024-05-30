@@ -6,8 +6,12 @@
             </mat-card>
         </div>
         <div class="upcomming">
-            <div class="title">Lịch Thi Dự Kiến:</div>
-            
+            <div class="title">
+                <p style="margin: 0px;">Lịch Thi Dự Kiến:</p>                
+            </div>
+            <div *ngIf="isToday()">
+                <p>Hello World!</p>
+            </div>
         </div>
     </div>
 </app-student-dashboard>

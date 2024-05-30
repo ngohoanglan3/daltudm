@@ -4,9 +4,9 @@ import { CanActivateFn, Router } from '@angular/router';
 export const studentGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
-  const localData = localStorage.getItem('accessToken');
+  const localData = sessionStorage.getItem('accessToken');
   if (localData != null) {
-    if (localStorage.getItem('role') == '1') {
+    if (sessionStorage.getItem('role') == '1') {
       return true;
     } else {
       router.navigate(['/login']);

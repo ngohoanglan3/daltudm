@@ -40,8 +40,8 @@ export class LoginComponent {
     const { username, password } = this.form
     this.auth.login(username, password).subscribe((response: any) => {
       this.logFail = false;
-      localStorage.setItem('accessToken', response.accessToken);
-      localStorage.setItem('role', response.role.role_id);
+      sessionStorage.setItem('accessToken', response.accessToken);
+      sessionStorage.setItem('role', response.role.role_id);
       if (response.role.role_id == 1) {
         this.route.navigateByUrl("/student");
       }

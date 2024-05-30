@@ -17,7 +17,7 @@ export class StudentDashboardComponent {
   constructor(private route: Router) {}
 
   Logout() {
-    localStorage.clear();    
+    sessionStorage.clear();    
   }
 
   toggleBar() {
