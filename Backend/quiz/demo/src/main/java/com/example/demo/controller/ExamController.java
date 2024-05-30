@@ -34,7 +34,7 @@ public class ExamController {
     }
 
     @GetMapping(route + "/getAllNoQue")
-    public List<ExamDTO> findAllNoQue() {
+    public List<ExamOnlyDTO> findAllNoQue() {
         return examService.findAllNoQue();
     }
 
