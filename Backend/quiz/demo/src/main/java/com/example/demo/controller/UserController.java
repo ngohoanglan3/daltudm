@@ -88,4 +88,9 @@ public class UserController {
     }
     
 
+    @PostMapping(route + "/aaaaaaaaaaaaaaaaaa")
+    public ResponseEntity<?> aaaaaaaaaaaaaaaaaaaaa(@RequestBody UserDTO dto) {
+        return new ResponseEntity<>(dto, HttpStatus.valueOf(201));
+
+    }
 }

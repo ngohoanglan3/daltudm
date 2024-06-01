@@ -43,6 +43,12 @@ public class ExamController {
         ExamOnlyDTO entity = examService.findByRollWithoutQuestion(id);
         return entity; 
     } 
+
+    @GetMapping(route + "full/{id}") 
+    public ExamDTO getfull(@PathVariable int id) { 
+        ExamDTO entity = examService.findByRoll(id);
+        return entity; 
+    } 
     
     @PreAuthorize("hasRole('GV')")
     @PostMapping(route + "/save")

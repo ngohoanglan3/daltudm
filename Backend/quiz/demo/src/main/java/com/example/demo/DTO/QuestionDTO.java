@@ -15,8 +15,6 @@ import lombok.ToString;
 public class QuestionDTO {
     private Integer question_id;
 
-    private int exam_id;
-
     private String description;
 
     // private Exam exam;
