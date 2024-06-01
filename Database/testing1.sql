@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2024 at 10:10 AM
+-- Generation Time: Jun 01, 2024 at 08:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -66,19 +66,20 @@ INSERT INTO `answer` (`answer_id`, `question_id`, `options`, `description`, `is_
 CREATE TABLE `exam` (
   `exam_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `time_test` datetime NOT NULL,
-  `description` varchar(1000) NOT NULL
+  `time_test_begin` datetime NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `test_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `exam`
 --
 
-INSERT INTO `exam` (`exam_id`, `name`, `time_test`, `description`) VALUES
-(1, 'testinh', '2024-04-05 15:23:28', 'tttttttttttttttttttttttttttttt'),
-(2, 'tessssssss', '2024-04-05 15:23:28', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
-(3, 'abcdef', '2024-04-12 10:53:52', 'asvdsvasvsab'),
-(4, 'asdvsadbsda', '2024-04-12 10:53:52', 'sadbsadsdab');
+INSERT INTO `exam` (`exam_id`, `name`, `time_test_begin`, `description`, `test_time`) VALUES
+(1, 'testinh', '2024-04-05 15:23:28', 'tttttttttttttttttttttttttttttt', 0),
+(2, 'tessssssss', '2024-04-05 15:23:28', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 0),
+(3, 'abcdef', '2024-04-12 10:53:52', 'asvdsvasvsab', 0),
+(4, 'asdvsadbsda', '2024-04-12 10:53:52', 'sadbsadsdab', 0);
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,8 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`role_id`, `role_name`) VALUES
 (1, 'ROLE_SV'),
 (2, 'ROLE_GV'),
-(3, 'ROLE_ADMIN');
+(3, 'ROLE_ADMIN'),
+(4, 'ROLE_TEST');
 
 -- --------------------------------------------------------
 
@@ -256,7 +258,7 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`

@@ -33,8 +33,11 @@ public class Exam {
     @Column(name="name")
     private String name;
 
-    @Column(name="time_test")
+    @Column(name="time_test_begin")
     private LocalDateTime time_test;
+
+    @Column(name="test_time")
+    private int test_time;
 
     @Column(name="description")
     private String description;
