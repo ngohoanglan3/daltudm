@@ -21,6 +21,8 @@ public class ExamDTO {
 
     private String description;
 
+    private int test_time;
+
     private Set<Question> qSet;
 
 }

@@ -16,6 +16,8 @@ public class ExamOnlyDTO {
 
     private LocalDateTime time_test;
 
+    private int test_time;
+    
     private String description;
 
 }

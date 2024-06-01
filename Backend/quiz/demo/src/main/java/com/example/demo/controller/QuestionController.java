@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.QuestionDTO;
 import com.example.demo.DTO.QuestionDTOfull;
+import com.example.demo.service.AnswerService;
 import com.example.demo.service.QuestionService;
 
 @RestController
@@ -17,6 +18,9 @@ public class QuestionController {
     final String route = "/Question";
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    AnswerController answerController;
     
     @GetMapping(route + "/getAll")
     public List<QuestionDTO> findAll() {
@@ -46,8 +50,10 @@ public class QuestionController {
 
     @PostMapping(route + "/savemul")
     public ResponseEntity<?> saveDiMul(@RequestBody Set<QuestionDTOfull> dto) {
-        for(QuestionDTOfull qOfull: dto)
+        for(QuestionDTOfull qOfull: dto){
             questionService.addNew(qOfull);
+            // answerController.savemultiple(qOfull.getASet());
+        }
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
 

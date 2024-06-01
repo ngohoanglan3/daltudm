@@ -34,13 +34,19 @@ public class ExamController {
     }
 
     @GetMapping(route + "/getAllNoQue")
-    public List<ExamDTO> findAllNoQue() {
+    public List<ExamOnlyDTO> findAllNoQue() {
         return examService.findAllNoQue();
     }
 
     @GetMapping(route + "/{id}") 
     public ExamOnlyDTO get(@PathVariable int id) { 
         ExamOnlyDTO entity = examService.findByRollWithoutQuestion(id);
+        return entity; 
+    } 
+
+    @GetMapping(route + "full/{id}") 
+    public ExamDTO getfull(@PathVariable int id) { 
+        ExamDTO entity = examService.findByRoll(id);
         return entity; 
     } 
     

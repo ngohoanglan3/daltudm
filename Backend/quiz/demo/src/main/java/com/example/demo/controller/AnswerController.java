@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,15 @@ public class AnswerController {
     @PostMapping(route + "/save")
     public ResponseEntity<?> saveDi(@RequestBody AnswerDTO dto) {
         answerService.addNew(dto);
+
+        return new ResponseEntity<>(null, HttpStatus.valueOf(201));
+
+    }
+
+    public ResponseEntity<?> savemultiple(@RequestBody Set<AnswerDTO> dto) {
+        for (AnswerDTO answerDTO : dto) {
+            answerService.addNew(answerDTO);
+        }
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
 

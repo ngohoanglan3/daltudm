@@ -30,7 +30,7 @@ public class ExamService {
     }
 
 
-    public List<ExamDTO> findAllNoQue(){
+    public List<ExamOnlyDTO> findAllNoQue(){
         return examRepository.findAll()
                 .stream()
                 .map(this::toDtoNoQuestion)
