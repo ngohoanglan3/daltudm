@@ -1,5 +1,5 @@
 * {
-  color: white;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .container {
@@ -10,21 +10,21 @@
   gap: 50px;
 }
 
-.calendar, .upcomming {
+.calendar,
+.upcomming {
   background-color: rgba(0, 0, 0, 0.2);
-  /* backdrop-filter: blur(5px); */
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 5px;
 }
 
 .calendar {
-    width: 400px;
-    height: auto;    
+  width: 400px;
+  height: auto;
 }
 
 .upcomming {
-    width: 700px;
-    height: 500px;
+  width: 700px;
+  height: 500px;
 }
 
 .demo-inline-calendar-card {
@@ -39,7 +39,32 @@
   filter: invert(1) !important;
 }
 
+::ng-deep .example-custom-date-class {
+  background: rgba(234, 182, 118, 0.3) !important;
+  border-radius: 100% !important;
+}
+
 .title {
   font-size: 20px;
   margin: 30px 20px 5px;
+}
+
+.exams {
+  max-height: 420px;
+  margin: 5px 20px;
+  overflow: auto;
+}
+
+.exams::-webkit-scrollbar {
+  display: none;
+}
+
+.exam {
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+.line {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 1px;
 }

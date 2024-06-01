@@ -16,6 +16,7 @@ export class TeacherDashboardComponent {
   
   Logout() {
     sessionStorage.clear();    
+    localStorage.clear();   
   }
 
   toggleBar() {

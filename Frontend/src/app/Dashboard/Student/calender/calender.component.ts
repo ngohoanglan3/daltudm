@@ -8,6 +8,7 @@ import {
 } from '@angular/material/core';
 import { StudentDashboardComponent } from '../student-dashboard/student-dashboard.component';
 import { GetExamService } from '../../../Service/get-exam.service';
+import { Router } from '@angular/router';
 
 export interface examElement {
   description: string;
@@ -35,8 +36,16 @@ export interface examElement {
 })
 export class CalenderComponent {
   selected: Date;
+  highlight: boolean;
+  highlightDate: Date[];
   examElements: examElement[];
-  constructor(private exam: GetExamService) {
+  selectedExams: examElement[];
+
+  onSelect(event) {
+    this.selected = event;
+  }
+
+  constructor(private exam: GetExamService, private route: Router) {
     this.selected = new Date();
     this.examElements = [
       {
@@ -46,38 +55,39 @@ export class CalenderComponent {
         time_test: new Date(),
       },
     ];
-  }
-
-  isToday(): boolean {
-    const today = new Date();
-    return (
-      this.selected.getDate() === today.getDate() &&
-      this.selected.getMonth() === today.getMonth() &&
-      this.selected.getFullYear() === today.getFullYear()
-    );
+    this.selectedExams = [];
+    this.highlightDate = [];
   }
 
   ngOnInit() {
-    this.exam.getExam().subscribe(
-      (response: any) => {
-        this.examElements = response.map((item) => ({
-          description: item.description,
-          exam_id: item.exam_id,
-          name: item.name,
-          time_test: new Date(item.time_test),
-        }));
-        // this.examElements.forEach((i) => {
-        //   console.log(i.time_test.toISOString())
-        // })
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
+    this.examElements = this.exam.getExamsFromLocalStorage();
+    this.examElements.forEach((exam) => {
+      exam.time_test = new Date(exam.time_test);
+    });
+    this.highlightDate = this.examElements.map(
+      (item) => new Date(item.time_test)
     );
   }
 
+  dateClass = (d: Date) => {
+    const highlight = new Date(d);
+    let className;
+
+    this.highlightDate.forEach((i) => {
+      if (
+        highlight.getDate() === i.getDate() &&
+        highlight.getMonth() === i.getMonth() &&
+        highlight.getFullYear() == i.getFullYear()
+      ) {
+        className = 'example-custom-date-class';
+      }
+    });
+    return className || '';
+  };
+
   viewExam(): boolean {
     let check = false;
+    this.selectedExams = [];
     this.examElements.forEach((i) => {
       if (
         this.selected.getDate() === i.time_test.getDate() &&
@@ -85,8 +95,13 @@ export class CalenderComponent {
         this.selected.getFullYear() === i.time_test.getFullYear()
       ) {
         check = true;
+        this.selectedExams.push(i);
       }
     });
     return check;
+  }
+
+  navigateToExam(examId: number): void {
+    this.route.navigate(['/student/exam', examId]);
   }
 }

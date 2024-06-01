@@ -13,5 +13,5 @@ import { FormsModule } from '@angular/forms';
     imports: [RouterOutlet, LoginComponent, HttpClientModule, FormsModule]
 })
 export class AppComponent {
-  title = 'demo';
+  title = 'Nhóm 12';
 }

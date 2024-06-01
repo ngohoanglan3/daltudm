@@ -24,6 +24,11 @@
   overflow: auto;
 }
 
+
+.mat-elevation-z8::-webkit-scrollbar {
+  display: none;
+}
+
 mat-form-field {
   width: 100%;
 }

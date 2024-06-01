@@ -6,7 +6,6 @@ export const cantBackGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   const localData = sessionStorage.getItem('accessToken');
-  debugger;
   if(localData != null) {
     if(sessionStorage.getItem('role') == '1') {
       router.navigateByUrl("/student");

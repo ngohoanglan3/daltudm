@@ -11,6 +11,7 @@ import { AddQuestionComponent } from './Dashboard/Teacher/add-question/add-quest
 import { studentGuard } from './Service/student.guard';
 import { teacherGuard } from './Service/teacher.guard';
 import { cantBackGuard } from './Service/cant-back.guard';
+import { ExamComponent } from './Dashboard/Student/exam/exam.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -21,7 +22,10 @@ export const routes: Routes = [
   { path: 'student', title: 'Sinh Viên', component: StudentDashboardComponent, canActivate: [studentGuard]},
   {
     path: 'student', canActivate: [studentGuard],
-    children: [{ path: 'calendar', title: 'Lịch Thi', component: CalenderComponent }],
+    children: [
+      { path: 'calendar', title: 'Lịch Thi', component: CalenderComponent },
+      { path: 'exam/:id', component:ExamComponent }
+    ],
   },
   { path: 'teacher', title: 'Giảng Viên', component: TeacherDashboardComponent, canActivate: [teacherGuard]},
   { path: 'teacher', canActivate: [teacherGuard],
@@ -30,7 +34,7 @@ export const routes: Routes = [
       { path: 'import', title: 'Nhập File', component: AddQuestionComponent}
     ]
   },
-  { path: '**', component: NotfoundComponent },
+  { path: '**', title: '404', component: NotfoundComponent },
 ];
 
 @NgModule({

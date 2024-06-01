@@ -2,15 +2,21 @@
     <div class="container" content>
         <div class="calendar">
             <mat-card class="demo-inline-calendar-card">
-                <mat-calendar [(selected)]="selected"></mat-calendar>
+                <mat-calendar [dateClass]="dateClass" [(selected)]="selected" (selectedChange)="onSelect($event)"></mat-calendar>                
             </mat-card>
         </div>
         <div class="upcomming">
             <div class="title">
                 <p style="margin: 0px;">Lịch Thi Dự Kiến:</p> 
             </div>
-            <div *ngIf="viewExam()">
-                <p>Hello World!</p>
+            <div *ngIf="viewExam()" class="exams">
+                <div *ngFor="let exam of selectedExams" (click)="navigateToExam(exam.exam_id)" class="exam">                    
+                    <div class="line"></div>
+                    <h2 style="margin: 5px 0px;">{{exam.name}} - {{exam.exam_id}}</h2>
+                    <p>Ngày thi: {{exam.time_test | date:'short'}}</p>
+                    <p>Thời gian thi: </p>
+                    <div class="line"></div>
+                </div>
             </div>
         </div>
     </div>

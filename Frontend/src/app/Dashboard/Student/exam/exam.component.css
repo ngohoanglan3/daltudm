@@ -1,0 +1,27 @@
+* {
+    color: rgba(255, 255, 255, 0.8)
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.exam {
+    width: 90%;
+    height: 85%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+.top_title {
+    margin: 30px 40px;
+}
+
+.main_content {
+    margin: 50px 70px 30px;
+}
