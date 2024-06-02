@@ -12,4 +12,6 @@ import java.util.List;
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Integer> {
     List<Answer> findByQuestion(Question question);
+
+    Answer findByOptionsAndQuestion(int option, Question question);
 }

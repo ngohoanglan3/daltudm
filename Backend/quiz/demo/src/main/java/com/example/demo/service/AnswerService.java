@@ -14,6 +14,7 @@ import com.example.demo.DTO.AnswernoObj;
 import com.example.demo.DTO.QuestionDTO;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Answer;
+import com.example.demo.model.Question;
 import com.example.demo.repository.AnswerRepository;
 
 import jakarta.transaction.Transactional;
@@ -44,6 +45,13 @@ public class AnswerService {
     public AnswerDTO findByRoll(int roll) {
         Answer entity = answerRepository.findById(roll)
                 .orElseThrow(() -> new myException("khong tim thay Answer voi so roll " + roll));
+
+        return toDto(entity);
+    }
+    
+
+    public AnswerDTO findByQuestionAndOption(Question question, int option) {
+        Answer entity = answerRepository.findByOptionsAndQuestion(option, question);
 
         return toDto(entity);
     }

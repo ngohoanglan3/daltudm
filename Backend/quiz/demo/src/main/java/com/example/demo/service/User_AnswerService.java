@@ -84,6 +84,8 @@ public class User_AnswerService {
             dto.setOption_choose(cross.getOption_choose());
             dto.setQuestion(questionService.getQuestion(cross.getQuestion_id()));
             dto.setUser(userService.getUser(cross.getUser_id()));
+            dto.set_correct(answerService.findByQuestionAndOption(questionService.getQuestion(cross.getQuestion_id()), 
+                cross.getOption_choose()).is_correct());
             User_Answer entity = new User_Answer();
             BeanUtils.copyProperties(dto, entity);
 
@@ -101,6 +103,8 @@ public class User_AnswerService {
             dto.setOption_choose(cross.getOption_choose());
             dto.setQuestion(questionService.getQuestion(cross.getQuestion_id()));
             dto.setUser(userService.getUser(cross.getUser_id()));
+            dto.set_correct(answerService.findByQuestionAndOption(questionService.getQuestion(cross.getQuestion_id()), 
+                cross.getOption_choose()).is_correct());
             User_Answer entity = new User_Answer();
             BeanUtils.copyProperties(dto, entity);
 
