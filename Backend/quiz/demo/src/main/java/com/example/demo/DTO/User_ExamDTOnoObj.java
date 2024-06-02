@@ -2,8 +2,6 @@ package com.example.demo.DTO;
 
 import java.time.Instant;
 
-import com.example.demo.model.User_Exam_Key;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,8 +9,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class User_ExamDTO {
-    private User_Exam_Key id;
+public class User_ExamDTOnoObj {
+    private int user_id;
+
+    private int exam_id;
 
     private float score;
 

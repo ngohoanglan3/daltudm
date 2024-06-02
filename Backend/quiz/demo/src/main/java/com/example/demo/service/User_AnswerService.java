@@ -93,7 +93,9 @@ public class User_AnswerService {
 
     public void addNewByCross(User_Answer_Cross cross) {
         User_AnswerDTO dto = new User_AnswerDTO();
-        User_Answer_Key key = new User_Answer_Key(cross.getUser_id(), cross.getQuestion_id());
+        User_Answer_Key key = new User_Answer_Key();
+        key.setUser_id(cross.getUser_id());
+        key.setQuestion_id( cross.getQuestion_id());
         dto.setId(key);
         if (user_AnswerRepository.findById(dto.getId()).isEmpty()){
             dto.setOption_choose(cross.getOption_choose());
@@ -109,10 +111,22 @@ public class User_AnswerService {
     
     public User_AnswerDTO findByCross(User_Answer_Cross cross) {
         User_Answer_Key key = new User_Answer_Key(cross.getUser_id(), cross.getQuestion_id());
+        
         User_Answer entity = user_AnswerRepository.findById(key)
                 .orElseThrow(() -> new myException("khong tim thay!"));
 
         return toDto(entity);
+    }
+    
+    public boolean checkexistByCross(User_Answer_Cross cross) {
+        User_Answer_Key key = new User_Answer_Key(cross.getUser_id(), cross.getQuestion_id());
+        
+        Optional<User_Answer> entity = user_AnswerRepository.findById(key);
+
+        if(entity.isPresent())
+            return true;
+        else
+            return false;
     }
 
     public void update(User_AnswerDTO dto) {

@@ -43,6 +43,12 @@ public class ExamService {
         return dto;
     }
 
+    public Exam toEntity(ExamDTO entity) {
+        Exam dto = new Exam();
+        BeanUtils.copyProperties(entity, dto);
+        return dto;
+    }
+
     private ExamOnlyDTO toDtoNoQuestion(Exam entity) {
         ExamOnlyDTO dto = new ExamOnlyDTO();
         BeanUtils.copyProperties(entity, dto);

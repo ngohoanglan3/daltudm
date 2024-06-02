@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.User_ExamDTO;
+import com.example.demo.DTO.User_ExamDTOnoObj;
 import com.example.demo.ex.myException;
 import com.example.demo.model.User_Exam;
 import com.example.demo.model.User_Exam_Key;
@@ -21,6 +22,12 @@ import jakarta.transaction.Transactional;
 public class User_ExamService {
     @Autowired
     User_ExamRepository user_ExamRepository;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ExamService examService;
 
     public List<User_ExamDTO> findAll(){
         return user_ExamRepository.findAll()
@@ -48,10 +55,18 @@ public class User_ExamService {
             user_ExamRepository.delete(entity);
     }
 
-    public void addNew(User_ExamDTO dto) {
+    public void addNew(User_ExamDTOnoObj check) {
+        User_ExamDTO dto = new User_ExamDTO();
+        BeanUtils.copyProperties(check, dto);
+        User_Exam_Key id = new User_Exam_Key();
+        id.setExam_id(check.getExam_id());
+        id.setUser_id(check.getUser_id());
+        dto.setId(id);
         if (user_ExamRepository.findById(dto.getId()).isEmpty()){
             User_Exam entity = new User_Exam();
             BeanUtils.copyProperties(dto, entity);
+            entity.setExam(examService.toEntity(examService.findByRoll(check.getExam_id())));
+            entity.setUser(userService.toEntity(userService.findByRoll(check.getUser_id())));
 
             user_ExamRepository.save(entity);
         }else throw new myException("da co!");
@@ -63,6 +78,23 @@ public class User_ExamService {
 
         User_Exam entity = op.get();
         BeanUtils.copyProperties(dto, entity);
+        user_ExamRepository.save(entity);
+    }
+
+    public void updatenoObj(User_ExamDTOnoObj check) {
+        User_ExamDTO dto = new User_ExamDTO();
+        BeanUtils.copyProperties(check, dto);
+        User_Exam_Key id = new User_Exam_Key();
+        id.setExam_id(check.getExam_id());
+        id.setUser_id(check.getUser_id());
+        dto.setId(id);
+        
+        Optional<User_Exam> op = user_ExamRepository.findById(dto.getId());
+
+        User_Exam entity = op.get();
+        BeanUtils.copyProperties(dto, entity);
+        entity.setExam(examService.toEntity(examService.findByRoll(check.getExam_id())));
+        entity.setUser(userService.toEntity(userService.findByRoll(check.getUser_id())));
         user_ExamRepository.save(entity);
     }
 

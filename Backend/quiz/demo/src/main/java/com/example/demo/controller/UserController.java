@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.JwtAuthResponse;
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.UserDTOnoObj;
 import com.example.demo.DTO.UserLogin;
 import com.example.demo.model.Role;
 import com.example.demo.service.AuthService;
@@ -45,10 +46,18 @@ public class UserController {
         return entity; 
     } 
 
+    // @PostMapping(route + "/save2")
+    // public ResponseEntity<?> saveDi(@RequestBody UserDTO dto) {
+    //     userService.addNew(dto);
+
+    //     return new ResponseEntity<>(null, HttpStatus.valueOf(201));
+
+    // }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(route + "/save")
-    public ResponseEntity<?> saveDi(@RequestBody UserDTO dto) {
-        userService.addNew(dto);
+    public ResponseEntity<?> saveDitest(@RequestBody UserDTOnoObj dto) {
+        userService.addNewNoExtraObj(dto);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
 
@@ -56,7 +65,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(route + "/update")
-    public ResponseEntity<?> updateDi(@RequestBody UserDTO dto, @PathVariable int id) {
+    public ResponseEntity<?> updateDi(@RequestBody UserDTOnoObj dto, @PathVariable int id) {
         userService.update(dto);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(303));
@@ -87,10 +96,4 @@ public class UserController {
         return ResponseEntity.ok("Hello Admin");
     }
     
-
-    @PostMapping(route + "/aaaaaaaaaaaaaaaaaa")
-    public ResponseEntity<?> aaaaaaaaaaaaaaaaaaaaa(@RequestBody UserDTO dto) {
-        return new ResponseEntity<>(dto, HttpStatus.valueOf(201));
-
-    }
 }

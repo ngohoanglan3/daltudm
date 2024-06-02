@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.User_ExamDTO;
+import com.example.demo.DTO.User_ExamDTOnoObj;
 import com.example.demo.model.User_Exam_Key;
 import com.example.demo.service.User_ExamService;
 
@@ -30,7 +31,7 @@ public class User_ExamController {
     } 
 
     @PostMapping({route + "/save", route + "/begin"})
-    public ResponseEntity<?> saveDi(User_ExamDTO dto) {
+    public ResponseEntity<?> saveDi(@RequestBody User_ExamDTOnoObj dto) {
         user_ExamService.addNew(dto);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
@@ -44,8 +45,8 @@ public class User_ExamController {
     }
 
     @PutMapping(route + "/update")
-    public ResponseEntity<?> updateDi(@RequestBody User_ExamDTO dto) {
-        user_ExamService.update(dto);
+    public ResponseEntity<?> updateDi(@RequestBody User_ExamDTOnoObj dto) {
+        user_ExamService.updatenoObj(dto);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(303));
     }
