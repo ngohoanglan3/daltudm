@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
+import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,7 @@ import com.example.demo.DTO.User_AnswerDTO;
 import com.example.demo.DTO.User_Answer_Cross;
 import com.example.demo.DTO.User_ExamDTO;
 import com.example.demo.model.User_Answer_Key;
+import com.example.demo.model.User_Exam_Key;
 import com.example.demo.service.User_AnswerService;
 
 @RestController
@@ -58,10 +59,11 @@ public class User_AnswerController {
         int numbofquest = lDtos.size();
         float score = 10 * (questioncorrect / numbofquest);
         User_ExamDTO aa = new User_ExamDTO();
+        User_Exam_Key key = new User_Exam_Key(temp.getQuestion().getQuestion_id(), temp.getUser().getUser_id()); 
         aa.setScore(score);
-        aa.setUser(temp.getUser());
-        aa.setExam(temp.getQuestion().getExam());
+        aa.setId(key);
         aa.setValid_test(false);
+        aa.setEnd_time(Instant.now());
         user_ExamController.submitTest(aa);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));

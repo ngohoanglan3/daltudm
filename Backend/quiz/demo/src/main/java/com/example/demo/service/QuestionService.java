@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.QuestionDTO;
 import com.example.demo.DTO.QuestionDTOfull;
+import com.example.demo.DTO.QuestionDTOnoObj;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Exam;
 import com.example.demo.model.Question;
@@ -27,6 +28,9 @@ public class QuestionService {
     @Autowired
     ExamRepository examRepository;
 
+    @Autowired
+    ExamService examService;
+
     public List<QuestionDTO> findAll(){
         return questionRepository.findAll()
                 .stream()
@@ -36,6 +40,12 @@ public class QuestionService {
 
     private QuestionDTO toDto(Question entity) {
         QuestionDTO dto = new QuestionDTO();
+        BeanUtils.copyProperties(entity, dto);
+        return dto;
+    }
+
+    public Question toEntity(QuestionDTO entity) {
+        Question dto = new Question();
         BeanUtils.copyProperties(entity, dto);
         return dto;
     }
@@ -76,6 +86,17 @@ public class QuestionService {
         if (questionRepository.findById(dto.getQuestion_id()).isEmpty()){
             Question entity = new Question();
             BeanUtils.copyProperties(dto, entity);
+
+            questionRepository.save(entity);
+        }else throw new myException("da co Question voi roll " + dto.getQuestion_id());
+
+    }
+
+    public void addNewnoObj(QuestionDTOnoObj dto) {
+        if (questionRepository.findById(dto.getQuestion_id()).isEmpty()){
+            Question entity = new Question();
+            BeanUtils.copyProperties(dto, entity);
+            entity.setExam(examService.toEntity(examService.findByRoll(dto.getExam_id())));
 
             questionRepository.save(entity);
         }else throw new myException("da co Question voi roll " + dto.getQuestion_id());

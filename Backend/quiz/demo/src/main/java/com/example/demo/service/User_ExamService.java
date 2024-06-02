@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.User_ExamDTO;
+import com.example.demo.DTO.User_ExamDTOnoObj;
 import com.example.demo.ex.myException;
 import com.example.demo.model.User_Exam;
 import com.example.demo.model.User_Exam_Key;
@@ -48,7 +49,11 @@ public class User_ExamService {
             user_ExamRepository.delete(entity);
     }
 
-    public void addNew(User_ExamDTO dto) {
+    public void addNew(User_ExamDTOnoObj check) {
+        User_ExamDTO dto = new User_ExamDTO();
+        BeanUtils.copyProperties(check, dto);
+        User_Exam_Key id = new User_Exam_Key(check.getExam_id(), check.getUser_id());
+        dto.setId(id);
         if (user_ExamRepository.findById(dto.getId()).isEmpty()){
             User_Exam entity = new User_Exam();
             BeanUtils.copyProperties(dto, entity);
@@ -59,6 +64,19 @@ public class User_ExamService {
     }
 
     public void update(User_ExamDTO dto) {
+        Optional<User_Exam> op = user_ExamRepository.findById(dto.getId());
+
+        User_Exam entity = op.get();
+        BeanUtils.copyProperties(dto, entity);
+        user_ExamRepository.save(entity);
+    }
+
+    public void updatenoObj(User_ExamDTOnoObj check) {
+        User_ExamDTO dto = new User_ExamDTO();
+        BeanUtils.copyProperties(check, dto);
+        User_Exam_Key id = new User_Exam_Key(check.getExam_id(), check.getUser_id());
+        dto.setId(id);
+        
         Optional<User_Exam> op = user_ExamRepository.findById(dto.getId());
 
         User_Exam entity = op.get();

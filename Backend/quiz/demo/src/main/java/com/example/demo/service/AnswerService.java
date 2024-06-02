@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DTO.AnswerDTO;
+import com.example.demo.DTO.AnswernoObj;
 import com.example.demo.DTO.QuestionDTO;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Answer;
@@ -23,6 +24,7 @@ public class AnswerService {
     @Autowired
     AnswerRepository answerRepository;
 
+    @Autowired
     QuestionService qService;
 
     public List<AnswerDTO> findAll(){
@@ -84,6 +86,26 @@ public class AnswerService {
 
         Answer entity = op.get();
         BeanUtils.copyProperties(dto, entity);
+        answerRepository.save(entity);
+    }
+
+    public void addNewNoObj(AnswernoObj dto) {
+        if (answerRepository.findById(dto.getAnswer_id()).isEmpty()){
+            Answer entity = new Answer();
+            entity.setQuestion(qService.toEntity(qService.findByRoll(dto.getQuestion_id())));
+            BeanUtils.copyProperties(dto, entity);
+
+            answerRepository.save(entity);
+        }else throw new myException("da co Answer voi roll " + dto.getAnswer_id());
+
+    }
+
+    public void updateNoObj(AnswernoObj dto) {
+        Optional<Answer> op = answerRepository.findById(dto.getAnswer_id());
+
+        Answer entity = op.get();
+        BeanUtils.copyProperties(dto, entity);
+        entity.setQuestion(qService.toEntity(qService.findByRoll(dto.getQuestion_id())));
         answerRepository.save(entity);
     }
 }

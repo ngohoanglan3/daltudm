@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.UserDTOnoObj;
 import com.example.demo.DTO.UserLogin;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Role;
@@ -36,6 +37,9 @@ public class UserService {
 
     @Autowired
     JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    RoleService roleService;
 
     public List<UserDTO> findAll(){
         return userRepository.findAll()
@@ -91,11 +95,26 @@ public class UserService {
 
     }
 
-    public void update(UserDTO dto) {
+    public void addNewNoExtraObj(UserDTOnoObj dto) {
+        if (userRepository.findByUsername(dto.getUsername()) == null)
+        {
+            User entity = new User();
+            BeanUtils.copyProperties(dto, entity);
+            entity.setRole(roleService.toEntity(roleService.findByRoll(dto.getRoleid())));
+            entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+            userRepository.save(entity);
+        }else throw new myException("User bi trung ten!");
+
+    }
+
+    public void update(UserDTOnoObj dto) {
         Optional<User> op = userRepository.findById(dto.getUser_id());
 
         User entity = op.get();
         BeanUtils.copyProperties(dto, entity);
+        entity.setRole(roleService.toEntity(roleService.findByRoll(dto.getRoleid())));
+        entity.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(entity);
     }
     

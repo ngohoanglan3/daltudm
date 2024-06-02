@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.DTO.RoleDTO;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Role;
-import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 
 import jakarta.transaction.Transactional;
@@ -32,6 +30,12 @@ public class RoleService {
 
     private RoleDTO toDto(Role entity) {
         RoleDTO dto = new RoleDTO();
+        BeanUtils.copyProperties(entity, dto);
+        return dto;
+    }
+
+    public Role toEntity(RoleDTO entity) {
+        Role dto = new Role();
         BeanUtils.copyProperties(entity, dto);
         return dto;
     }
