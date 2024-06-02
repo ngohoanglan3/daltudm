@@ -15,6 +15,7 @@ import com.example.demo.DTO.User_ExamDTO;
 import com.example.demo.model.User_Answer_Key;
 import com.example.demo.model.User_Exam_Key;
 import com.example.demo.service.User_AnswerService;
+import com.example.demo.service.User_ExamService;
 
 @RestController
 public class User_AnswerController {
@@ -22,8 +23,14 @@ public class User_AnswerController {
     @Autowired
     User_AnswerService user_AnswerService;
 
+    @Autowired
     QuestionController questionController;
+
+    @Autowired
     User_ExamController user_ExamController;
+
+    @Autowired
+    User_ExamService user_ExamService;
     
     @GetMapping(route + "/getAll")
     public List<User_AnswerDTO> findAll() {
@@ -43,10 +50,19 @@ public class User_AnswerController {
         if(!cross.isEmpty())
         {
             for (User_Answer_Cross user_Answer_Cross : cross) {
-                User_AnswerDTO ss = user_AnswerService.findByCross(user_Answer_Cross);
-                user_AnswerService.addNewByCross(user_Answer_Cross);
-                if (ss.is_correct()) {
-                    questioncorrect += 1;
+                if(user_AnswerService.checkexistByCross(user_Answer_Cross)){
+                    User_AnswerDTO ss = user_AnswerService.findByCross(user_Answer_Cross);
+                    user_AnswerService.updateProgress(user_Answer_Cross);
+                    if (ss.is_correct()) {
+                        questioncorrect += 1;
+                    }
+                }
+                else{
+                    user_AnswerService.addNewByCross(user_Answer_Cross);
+                    User_AnswerDTO ss = user_AnswerService.findByCross(user_Answer_Cross);
+                    if (ss.is_correct()) {
+                        questioncorrect += 1;
+                    }
                 }
             }
             temp = user_AnswerService.findByCross(cross.getFirst());
@@ -58,8 +74,10 @@ public class User_AnswerController {
         List<QuestionDTO> lDtos = questionController.getbyExamid(hmm);
         int numbofquest = lDtos.size();
         float score = 10 * (questioncorrect / numbofquest);
-        User_ExamDTO aa = new User_ExamDTO();
-        User_Exam_Key key = new User_Exam_Key(temp.getQuestion().getQuestion_id(), temp.getUser().getUser_id()); 
+        User_Exam_Key key = new User_Exam_Key();
+        key.setExam_id(temp.getQuestion().getExam().getExam_id());
+        key.setUser_id(temp.getUser().getUser_id());
+        User_ExamDTO aa = user_ExamService.findByKey(key);
         aa.setScore(score);
         aa.setId(key);
         aa.setValid_test(false);

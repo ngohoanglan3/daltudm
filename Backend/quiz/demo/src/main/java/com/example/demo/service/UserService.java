@@ -53,6 +53,12 @@ public class UserService {
         BeanUtils.copyProperties(entity, dto);
         return dto;
     }
+
+    public User toEntity(UserDTO entity) {
+        User dto = new User();
+        BeanUtils.copyProperties(entity, dto);
+        return dto;
+    }
     
 
     public UserDTO findByRoll(int roll) {
