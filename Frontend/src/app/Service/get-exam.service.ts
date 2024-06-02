@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, tap } from 'rxjs';
+import { tap } from 'rxjs';
+
+export interface examElement {
+  description: string;
+  exam_id: number;
+  name: string;
+  time_test: Date;
+  test_time: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -30,5 +39,31 @@ export class GetExamService {
   getExamsFromLocalStorage() {
     const exams = localStorage.getItem('exams');
     return exams ? JSON.parse(exams) : null;
+  }
+
+  getNearestExam(): examElement | null {
+    const exams = localStorage.getItem('exams');
+    if (!exams) {
+      return null;
+    }
+
+    const parsedExams = JSON.parse(exams);
+    let i = 0;
+    while (i < parsedExams.length) {
+      const testDate = new Date(parsedExams[i].time_test).getTime() + 15 * 60 * 1000;
+      const now = new Date().getTime();
+      if (testDate > now) {
+        return {
+          description: parsedExams[i].description,
+          exam_id: parsedExams[i].exam_id,
+          name: parsedExams[i].name,
+          time_test: new Date(parsedExams[i].time_test),
+          test_time: parsedExams[i].test_time,
+        };
+      }
+      i++;
+    }
+
+    return null;
   }
 }

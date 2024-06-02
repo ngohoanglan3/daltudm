@@ -1,0 +1,21 @@
+<div class="container">
+    <header class="header">
+        <p style="margin: 0px 40px;">{{examTitle}}</p>
+    </header>
+    <div class="main-content">
+        <div class="exam-panel">
+            <div *ngFor="let question of questions; let i = index" class="question">
+                <p>Q{{i + 1}}. {{question.description}}</p>
+                <div class="options">
+                    <mat-radio-group aria-label="Câu hỏi trắc nghiệm">
+                        <mat-radio-button value="option1">A. {{question.aset[0].description}}</mat-radio-button>
+                        <mat-radio-button value="option2">B. {{question.aset[1].description}}</mat-radio-button>
+                        <mat-radio-button value="option3">C. {{question.aset[2].description}}</mat-radio-button>
+                        <mat-radio-button value="option4">D. {{question.aset[3].description}}</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </div>
+        <div class="tool-panel"></div>
+    </div>
+</div>

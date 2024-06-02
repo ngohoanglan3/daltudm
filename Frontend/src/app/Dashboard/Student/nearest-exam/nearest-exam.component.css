@@ -16,8 +16,6 @@
     background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
 }
 
 .top_title {
@@ -26,4 +24,12 @@
 
 .main_content {
     margin: 50px 70px 30px;
+}
+
+.do_test {
+    width: auto;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end
 }

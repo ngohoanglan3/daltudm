@@ -9,6 +9,7 @@ export interface examElement {
   exam_id: number;
   name: string;
   time_test: Date;
+  test_time: number;
 }
 
 @Component({
@@ -32,6 +33,7 @@ export class ExamComponent {
       exam_id: 0,
       name: '',
       time_test: new Date(),
+      test_time: 0
     };
   }
 
@@ -46,6 +48,7 @@ export class ExamComponent {
         exam_id: exam.exam_id,
         name: exam.name,
         time_test: new Date(exam.time_test),
+        test_time: exam.test_time
       };
     }
   }

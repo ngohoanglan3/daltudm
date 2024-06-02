@@ -39,7 +39,6 @@ export class ViewQuestionComponent {
     'column4',
     'column5',
   ];
-  data: any = [];
   ELEMENT_DATA: questionElement[]
   dataSource: MatTableDataSource<questionElement>;
   selection = new SelectionModel<questionElement>(true, []);

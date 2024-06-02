@@ -12,6 +12,8 @@ import { studentGuard } from './Service/student.guard';
 import { teacherGuard } from './Service/teacher.guard';
 import { cantBackGuard } from './Service/cant-back.guard';
 import { ExamComponent } from './Dashboard/Student/exam/exam.component';
+import { NearestExamComponent } from './Dashboard/Student/nearest-exam/nearest-exam.component';
+import { DoExamComponent } from './Exam/do-exam/do-exam.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,7 +26,9 @@ export const routes: Routes = [
     path: 'student', canActivate: [studentGuard],
     children: [
       { path: 'calendar', title: 'Lịch Thi', component: CalenderComponent },
-      { path: 'exam/:id', component:ExamComponent }
+      { path: 'exam/:id', title: 'Bài Thi Đang Mở', component:ExamComponent },
+      { path: 'exam', title: 'Bài Thi', component: NearestExamComponent },
+      { path: 'doExam', title: 'Thi', component: DoExamComponent},
     ],
   },
   { path: 'teacher', title: 'Giảng Viên', component: TeacherDashboardComponent, canActivate: [teacherGuard]},

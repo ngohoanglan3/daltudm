@@ -1,12 +1,14 @@
 <app-student-dashboard>
     <div class="container" content>
         <div *ngIf="examElements" class="exam">
-            <h1 class="top_title">Bài Thi Đang Mở</h1>
+            <h1 class="top_title">Bài Thi Hiện Tại</h1>
             <div class="main_content">
                 <h3 style="margin: 0px; color: white !important;;">{{examElements.name}} - {{examElements.exam_id}}</h3>
                 <p style="margin: 30px 10px; text-align: justify;">{{examElements.description}}</p>
                 <p>Ngày Thi: {{ examElements.time_test | date:'h:mm a - dd/MM/yyyy' }}</p>
-            </div>            
+                <i>Thời Gian: {{examElements.test_time}} Phút</i>
+            </div>
+            
         </div>
     </div>
 </app-student-dashboard>
