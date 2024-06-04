@@ -54,6 +54,10 @@
 .tool-panel {
   width: 300px;
   background-color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .question {
@@ -76,4 +80,9 @@
 mat-radio-group {
   display: flex;
   flex-direction: column;
+}
+
+.submitButton {
+  border-radius: 50px;
+  width: 70%;
 }

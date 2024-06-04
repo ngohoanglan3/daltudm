@@ -39,6 +39,7 @@ export class LoginComponent {
   onLogin() {
     const { username, password } = this.form
     this.auth.login(username, password).subscribe((response: any) => {
+      console.log(response)
       this.logFail = false;
       sessionStorage.setItem('accessToken', response.accessToken);
       sessionStorage.setItem('role', response.role.role_id);

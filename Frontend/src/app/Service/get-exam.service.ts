@@ -50,9 +50,12 @@ export class GetExamService {
     const parsedExams = JSON.parse(exams);
     let i = 0;
     while (i < parsedExams.length) {
-      const testDate = new Date(parsedExams[i].time_test).getTime() + 15 * 60 * 1000;
+      const testDate = new Date(parsedExams[i].time_test).getTime();
+      const time = new Date(parsedExams[i].test_time).getTime();
+      const testEndDate = testDate + 15 * 60 * 1000;
+      const testCloseDate = testDate + time * 60 * 1000;
       const now = new Date().getTime();
-      if (testDate > now) {
+      if ((testEndDate > now) || (testDate < now && now < testCloseDate)) {
         return {
           description: parsedExams[i].description,
           exam_id: parsedExams[i].exam_id,

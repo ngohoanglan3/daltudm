@@ -9,8 +9,6 @@ import lombok.ToString;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 // import com.fasterxml.jackson.annotation.*;
 
 import jakarta.persistence.Column;

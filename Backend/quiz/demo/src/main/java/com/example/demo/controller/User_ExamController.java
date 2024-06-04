@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class User_ExamController {
         return user_ExamService.findAll();
     }
 
-    @GetMapping(route + "/{id}") 
+    @GetMapping(route + "/diem") 
     public User_ExamDTO get(@RequestBody User_Exam_Key id) { 
         User_ExamDTO entity = user_ExamService.findByKey(id);
         return entity; 

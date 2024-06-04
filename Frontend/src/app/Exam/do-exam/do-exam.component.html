@@ -7,15 +7,22 @@
             <div *ngFor="let question of questions; let i = index" class="question">
                 <p>Q{{i + 1}}. {{question.description}}</p>
                 <div class="options">
-                    <mat-radio-group aria-label="Câu hỏi trắc nghiệm">
-                        <mat-radio-button value="option1">A. {{question.aset[0].description}}</mat-radio-button>
-                        <mat-radio-button value="option2">B. {{question.aset[1].description}}</mat-radio-button>
-                        <mat-radio-button value="option3">C. {{question.aset[2].description}}</mat-radio-button>
-                        <mat-radio-button value="option4">D. {{question.aset[3].description}}</mat-radio-button>
+                    <mat-radio-group (change)="onOptionChange($event, i)" aria-label="Câu hỏi trắc nghiệm">
+                        <mat-radio-button value={{question.aset[0].answer_id}}>A.
+                            {{question.aset[0].description}}</mat-radio-button>
+                        <mat-radio-button value={{question.aset[1].answer_id}}>B.
+                            {{question.aset[1].description}}</mat-radio-button>
+                        <mat-radio-button value={{question.aset[2].answer_id}}>C.
+                            {{question.aset[2].description}}</mat-radio-button>
+                        <mat-radio-button value={{question.aset[3].answer_id}}>D.
+                            {{question.aset[3].description}}</mat-radio-button>
                     </mat-radio-group>
                 </div>
             </div>
         </div>
-        <div class="tool-panel"></div>
+        <div class="tool-panel">
+            <h2 style="text-align: center; margin-top: 50px; margin-bottom: 100px;">Thời gian còn lại: {{ countdown }}</h2>
+            <button class="submitButton" mat-flat-button (click)="Submit()" color="primary">NỘP BÀI</button>
+        </div>
     </div>
 </div>

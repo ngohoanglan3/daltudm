@@ -14,6 +14,8 @@ import { cantBackGuard } from './Service/cant-back.guard';
 import { ExamComponent } from './Dashboard/Student/exam/exam.component';
 import { NearestExamComponent } from './Dashboard/Student/nearest-exam/nearest-exam.component';
 import { DoExamComponent } from './Exam/do-exam/do-exam.component';
+import { ViewExamComponent } from './Dashboard/Teacher/view-exam/view-exam.component';
+import { ViewScoreComponent } from './Dashboard/Teacher/view-score/view-score.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -35,7 +37,9 @@ export const routes: Routes = [
   { path: 'teacher', canActivate: [teacherGuard],
     children: [
       { path: 'viewQuestion', title: 'Xem Câu Hỏi', component: ViewQuestionComponent},
-      { path: 'import', title: 'Nhập File', component: AddQuestionComponent}
+      { path: 'import', title: 'Nhập File', component: AddQuestionComponent},
+      { path: 'viewExam', title: 'Đề Thi', component: ViewExamComponent},
+      { path: 'viewScore', title: 'Thống Kê', component: ViewScoreComponent}
     ]
   },
   { path: '**', title: '404', component: NotfoundComponent },

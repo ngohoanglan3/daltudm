@@ -1,6 +1,6 @@
 <app-student-dashboard>
     <div class="container" content>
-        <div class="exam">
+        <div *ngIf="examElements" class="exam">
             <h1 class="top_title">Bài Thi Đang Mở</h1>
             <div class="main_content">
                 <h3 style="margin: 0px; color: white !important;;">{{examElements.name}} - {{examElements.exam_id}}</h3>

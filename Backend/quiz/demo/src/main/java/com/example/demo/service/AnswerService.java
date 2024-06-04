@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -14,6 +16,7 @@ import com.example.demo.DTO.AnswernoObj;
 import com.example.demo.DTO.QuestionDTO;
 import com.example.demo.ex.myException;
 import com.example.demo.model.Answer;
+import com.example.demo.model.Question;
 import com.example.demo.repository.AnswerRepository;
 
 import jakarta.transaction.Transactional;
@@ -39,6 +42,13 @@ public class AnswerService {
         BeanUtils.copyProperties(entity, dto);
         return dto;
     }
+
+    public AnswernoObj toDtoMini(Answer entity) {
+        AnswernoObj dto = new AnswernoObj();
+        BeanUtils.copyProperties(entity, dto);
+        dto.setQuestion_id(entity.getQuestion().getQuestion_id());
+        return dto;
+    }
     
 
     public AnswerDTO findByRoll(int roll) {
@@ -46,6 +56,15 @@ public class AnswerService {
                 .orElseThrow(() -> new myException("khong tim thay Answer voi so roll " + roll));
 
         return toDto(entity);
+    }
+    
+
+    public Set<AnswernoObj> findByQuestion(Question question) {
+        Set<AnswernoObj> entity = answerRepository.findByQuestion(question).stream()
+        .map(this::toDtoMini).
+        collect(Collectors.toSet());
+
+        return entity;
     }
 
     public List<AnswerDTO> getQuestionListUsingExamID(int examid) {

@@ -2,18 +2,22 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.DTO.AnswernoObj;
 import com.example.demo.DTO.QuestionDTO;
-import com.example.demo.DTO.QuestionDTOfull;
+import com.example.demo.DTO.QuestionDTOmini;
 import com.example.demo.DTO.QuestionDTOnoObj;
 import com.example.demo.ex.myException;
+import com.example.demo.model.Answer;
 import com.example.demo.model.Exam;
 import com.example.demo.model.Question;
+import com.example.demo.repository.AnswerRepository;
 import com.example.demo.repository.ExamRepository;
 import com.example.demo.repository.QuestionRepository;
 
@@ -31,6 +35,9 @@ public class QuestionService {
     @Autowired
     ExamService examService;
 
+    @Autowired
+    AnswerRepository answerRepository;
+
     public List<QuestionDTO> findAll(){
         return questionRepository.findAll()
                 .stream()
@@ -38,8 +45,34 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
+    public List<QuestionDTOmini> findAllMini(){
+        List<QuestionDTOmini> list = questionRepository.findAll()
+        .stream()
+        .map(this::toDtoMini)
+        .collect(Collectors.toList());
+        for (QuestionDTOmini questionDTOmini : list) {
+            Question quest = questionRepository.findById(questionDTOmini.getQuestion_id())
+                .orElseThrow(() -> new myException("khong tim thay Question voi so roll " + questionDTOmini.getQuestion_id()));
+            questionDTOmini.setASet(quest.getASet().stream().map(this::toDtoMini2).collect(Collectors.toSet()));
+        }
+        return list;
+    }
+
+    private AnswernoObj toDtoMini2(Answer entity) {
+        AnswernoObj dto = new AnswernoObj();
+        BeanUtils.copyProperties(entity, dto);
+        dto.setQuestion_id(entity.getQuestion().getQuestion_id());
+        return dto;
+    }
+
     private QuestionDTO toDto(Question entity) {
         QuestionDTO dto = new QuestionDTO();
+        BeanUtils.copyProperties(entity, dto);
+        return dto;
+    }
+
+    private QuestionDTOmini toDtoMini(Question entity) {
+        QuestionDTOmini dto = new QuestionDTOmini();
         BeanUtils.copyProperties(entity, dto);
         return dto;
     }
@@ -82,7 +115,7 @@ public class QuestionService {
                 questionRepository.delete(entity);
     }
 
-    public void addNew(QuestionDTOfull dto) {
+    public void addNew(QuestionDTOmini dto) {
         if (questionRepository.findById(dto.getQuestion_id()).isEmpty()){
             Question entity = new Question();
             BeanUtils.copyProperties(dto, entity);

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StudentDashboardComponent } from '../student-dashboard/student-dashboard.component';
 import { GetExamService } from '../../../Service/get-exam.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 export interface examElement {
@@ -12,13 +12,22 @@ export interface examElement {
   test_time: number;
 }
 
+export interface save {
+  user_id: number,
+  exam_id: number,
+  score: number,
+  start_time: string,
+  end_time: string,
+  valid_test: boolean,
+}
+
 @Component({
   selector: 'app-nearest-exam',
   standalone: true,
   templateUrl: './nearest-exam.component.html',
   styleUrl: './nearest-exam.component.css',
   providers: [GetExamService],
-  imports: [StudentDashboardComponent, DatePipe],
+  imports: [StudentDashboardComponent, DatePipe, CommonModule],
 })
 export class NearestExamComponent {
   examElements: examElement;
@@ -35,7 +44,7 @@ export class NearestExamComponent {
   startExam() {
     const now = new Date().getTime();
     const testDate = new Date(this.examElements.time_test).getTime();
-    const testEndDate = testDate + 15 * 60 * 1000; // Thêm 15 phút vào thời gian bắt đầu
+    const testEndDate = testDate + 15 * 60 * 1000; // Thêm 15 phút vào thời gian bắt đầu  
 
     if (now > testDate && now < testEndDate) {
       this.route.navigate(['student/doExam']); // Thay '/exam-page' bằng đường dẫn thực tế của bạn

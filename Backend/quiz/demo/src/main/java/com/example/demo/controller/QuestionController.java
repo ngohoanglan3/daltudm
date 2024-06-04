@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTO.QuestionDTO;
-import com.example.demo.DTO.QuestionDTOfull;
+import com.example.demo.DTO.QuestionDTOmini;
 import com.example.demo.service.AnswerService;
 import com.example.demo.service.QuestionService;
 
@@ -23,8 +23,8 @@ public class QuestionController {
     AnswerController answerController;
     
     @GetMapping(route + "/getAll")
-    public List<QuestionDTO> findAll() {
-        return questionService.findAll();
+    public List<QuestionDTOmini> findAll() {
+        return questionService.findAllMini();
     }
 
     @GetMapping(route + "/{id}") 
@@ -41,7 +41,7 @@ public class QuestionController {
 
 
     @PostMapping(route + "/save")
-    public ResponseEntity<?> saveDi(@RequestBody QuestionDTOfull dto) {
+    public ResponseEntity<?> saveDi(@RequestBody QuestionDTOmini dto) {
         questionService.addNew(dto);
 
         return new ResponseEntity<>(null, HttpStatus.valueOf(201));
@@ -49,8 +49,8 @@ public class QuestionController {
     }
 
     @PostMapping(route + "/savemul")
-    public ResponseEntity<?> saveDiMul(@RequestBody Set<QuestionDTOfull> dto) {
-        for(QuestionDTOfull qOfull: dto){
+    public ResponseEntity<?> saveDiMul(@RequestBody Set<QuestionDTOmini> dto) {
+        for(QuestionDTOmini qOfull: dto){
             questionService.addNew(qOfull);
             // answerController.savemultiple(qOfull.getASet());
         }
